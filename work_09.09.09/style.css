@@ -1,0 +1,56 @@
+img{
+    margin: 20%;
+}
+td.solid{
+    width: 250px;
+    height: 250зч;
+    border:5px solid black;
+}
+td.dotted{
+    width: 420px;
+    height: auto;
+    border:5px dotted black;
+}
+
+p{
+    color: #707070;
+}
+
+.otstup{
+    margin: 2%;
+}
+td{
+    margin: 10px;
+}
+
+div{
+    display: none;
+}
+div.otstup{
+    display: inline;
+}
+div.btn-group{
+    display: inline;
+}
+
+.btn-group .button {
+    background-color: #707070; /* Green */
+    border: 1px solid #363333;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 150px;
+    display: illine;
+  
+}
+  
+  .btn-group .button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+  }
+  
+  .btn-group .button:hover {
+    background-color: #363333;
+  }
