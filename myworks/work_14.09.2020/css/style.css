@@ -1,0 +1,44 @@
+.dub{
+    margin: 0; /* Убираем отступы */
+    height: 100%; /* Высота страницы */
+    background: url(https://www.tania-soleil.com/wp-content/uploads/2019/08/Lukomorie.jpg) no-repeat; /* Параметры фона */
+    background-size: cover; /* Фон занимает всю доступную площадь */}
+.stih{
+    text-align: center;
+    color: rgb(9, 19, 46);
+    font-family: 'Lobster', cursive;
+    /*
+        Группы Шрифтов
+            1) Serif
+                стиль имеет засечки, контрастные шрифты
+            2) Sans Serif
+                без засечек (прямые)
+            3) Script
+                иммитация рукописных шрифтов (в том числе и готика)
+            4) Decore
+                шрифты, роторые стилизованны под какую-либо идею
+            5) Символы
+                картинки
+
+        Awesome - все стандартные элементы, которые используются в bootstrap, не для слабонервных!
+
+        https://fonts.google.com/
+
+    */
+
+}
+.title{
+    text-align: center;
+    color: rgb(31, 56, 85);
+    font-family: 'Stalinist One', cursive;
+}
+.content{ 
+    margin-left: 25%;
+    margin-right: 25%;
+    background-color: rgba(98, 188, 223, 0.267);
+
+    background-size: cover; /* Фон занимает всю доступную площадь */
+    
+    width: 50%;
+    position: absolute;
+}

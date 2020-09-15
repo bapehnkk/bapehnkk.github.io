@@ -1,0 +1,32 @@
+html { height: 100%; }
+body {
+ margin: 0; /* Убираем отступы */
+ height: 100%; /* Высота страницы */
+ background: url(img/background.jpg) no-repeat; /* Параметры фона */
+ background-size: cover; /* Фон занимает всю доступную площадь */
+}
+
+.header{
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  display: block;
+  background-color: #fff;
+  opacity: 0.3;
+  margin-top: -0.5rem;
+  transition: 0.3s;
+}
+.header:hover{
+  position: relative;
+  width: 100%;
+  height: 7rem;
+  display: block;
+  background-color: #fff;
+  opacity: 0.9;
+  border-radius: 1rem;
+  margin-top: -1rem;
+}
+.logo{
+  margin: 0.25rem;
+  height: inherit;  
+}
