@@ -4,6 +4,7 @@ body {
  height: 100%; /* Высота страницы */
  background: url(img/background.jpg) no-repeat; /* Параметры фона */
  background-size: cover; /* Фон занимает всю доступную площадь */
+ font-family: 'Seymour One', sans-serif;
 }
 
 .header{
@@ -29,4 +30,8 @@ body {
 .logo{
   margin: 0.25rem;
   height: inherit;  
+}
+.menumaster{
+  margin: 0;
+  padding: 0;
 }
