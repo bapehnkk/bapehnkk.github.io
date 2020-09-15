@@ -5,7 +5,7 @@
     background-size: cover; /* Фон занимает всю доступную площадь */}
 .stih{
     text-align: center;
-    color: rgb(9, 19, 46);
+    color: rgb(245, 245, 245);
     font-family: 'Lobster', cursive;
     /*
         Группы Шрифтов
@@ -29,16 +29,17 @@
 }
 .title{
     text-align: center;
-    color: rgb(31, 56, 85);
+    color: rgb(10 ,10 ,10);
     font-family: 'Stalinist One', cursive;
-}
-.content{ 
+}/*
+.content{   думал сделать вон, выровнял по центру 
     margin-left: 25%;
     margin-right: 25%;
-    background-color: rgba(98, 188, 223, 0.267);
+    background-color: rgba(98, 188, 223, 0);
 
-    background-size: cover; /* Фон занимает всю доступную площадь */
+    background-size: cover; /* Фон занимает всю доступную площадь *//*
     
     width: 50%;
     position: absolute;
 }
+*/
