@@ -31,7 +31,46 @@ body {
   margin: 0.25rem;
   height: inherit;  
 }
-.menumaster{
-  margin: 0;
-  padding: 0;
+
+
+li {
+  list-style-type: none; /* Убираем маркеры */
+ }
+ ul {
+  padding-left: 0; /* Сдвигаем список влево */
+  margin: 0 auto;
+ }
+
+
+a {
+  text-decoration: none;
+  transition: .5s linear;
+}
+
+nav {
+  display: block;
+  width: min-content;
+  display: block; /* смещает только блоки */ 
+  margin-left: auto;
+}
+
+
+.four ul {
+  display: -webkit-flex; 
+  display: flex;
+  background: #a7d4ff;
+  padding-left: 0;
+}
+.four a {
+  padding: 1em;
+  display: block;
+  color: #22939b;
+  border-right: 1px solid #4da9ce;
+  background: rgba(81, 229, 255, 0.3);
+  height: 1rem;
+
+}
+.four a:hover {
+  background: #4da9ce;
+  height: 5rem;
 }
