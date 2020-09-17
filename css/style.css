@@ -32,12 +32,12 @@ body {
   height: inherit;  
 }
 
-
+/*
 li {
-  list-style-type: none; /* Убираем маркеры */
+  list-style-type: none; /* Убираем маркеры *//*
  }
  ul {
-  padding-left: 0; /* Сдвигаем список влево */
+  padding-left: 0; /* Сдвигаем список влево *//*
   margin: 0 auto;
  }
 
@@ -47,10 +47,11 @@ a {
   transition: .5s linear;
 }
 
+
 nav {
   display: block;
   width: min-content;
-  display: block; /* смещает только блоки */ 
+  display: block; /* смещает только блоки */ /*
   margin-left: auto;
 }
 
@@ -73,4 +74,4 @@ nav {
 .four a:hover {
   background: #4da9ce;
   height: 5rem;
-}
+}*/

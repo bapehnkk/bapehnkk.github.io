@@ -1,0 +1,144 @@
+/*Первым делом сбросим все отступы, которые могут задавать по умолчанию разные браузеры:*/
+
+.dws-menu *{
+    margin: 0;
+    padding: 0;
+   }
+
+header{
+    margin-right: 0;
+    position: fixed;
+}
+
+/*Скроем маркеры у списков:*/
+.dws-menu ul,  
+.dws-menu ol{
+ list-style: none;
+}
+
+/*Списки отобразим по горизонтали при помощи display: flex, и делаем его по центру:*/
+
+.dws-menu > ul{
+    display: flex;
+    justify-content: center;
+   }
+
+/*В header сделаем отступ только сверху, пропишем margin-top.*/
+
+header{
+    margin-top: 0;
+    font-family: Cuprum, Arial, Helvetica, sans-serif;
+   }    
+
+/*Оформим наше меню, зададим цвет кнопок, шрифт и т.д.
+
+Отбираем ссылки nav > ul li , и делаем их блочными элементами. 
+Задаем фон меню, пропишем отступы, 
+укажем размер, цвет, уберем подчеркивание, 
+и сделаем заголовки заглавными буквами.*/
+
+.dws-menu > ul li a{
+    display: block;
+    background: #ececed;
+    padding: 15px 30px 15px 40px;
+    font-size: 14px;
+    color: #454547;
+    text-decoration: none;
+    text-transform:uppercase;
+   }   
+   
+/*Затем позиционируем иконки, спискам присвоим position: relative; 
+для дальнейшее центровки иконок:*/
+
+.dws-menu > ul li{
+    position: relative;
+   }   
+
+/*Назначим спискам разделитель в виде бордюрчика, 
+отбираем первый элемент LI, задаем бордюр. 
+Отбираем последний элемент LI присваиваем ему аналогичный бордюр.*/
+
+.dws-menu > ul li:first-child{
+    border-left: 1px solid #b2b3b5;
+   }
+.dws-menu > ul li:last-child{
+    border-right: 1px solid #babbbd;
+   }  
+
+/*Делаем разделители спискам LI:*/
+
+.dws-menu > ul li{
+    border-right: 1px solid #c7c8ca;
+   }   
+
+/*Анимируем горизонтальное меню при наведение
+Отбираем ссылки и назначаем цвет блоку, и цвет самой ссылки 
+с иконкой присвоим белый. Давайте добавим еще темную тень. 
+С помощью transition в 0.3 сек сделаем плавное появление:*/
+.dws-menu li a:hover{
+    background: #454547;
+    color: #ffffff;
+    box-shadow: 1px 5px 10px -5px black;
+    transition: all 0.3s ease;
+   }    
+
+/*И что бы этот эффект плавно исчезал, добавим этот стиль к ссылке в покое:*/
+
+.dws-menu > ul li a{
+    transition: all 0.3s ease;
+   }    
+
+/*Основное меню закончили и можно приступать к описанию подменю и вложенные в них меню.
+*/
+/*
+Описываем выпадающее меню CSS / HTML
+Открываем index.html и добавим, к примеру, в продукцию дополнительное меню. Между списками LI вставляем UL, в нем разместим пять списков, в которых будут находиться ссылки с атрибутом herf=”#”.
+
+ul>li*5>a[href="#"]
+Жмем применить, пропишем название пунктов (Одежда, Электроника, Продукты питания, Инструменты, Быт. химия).
+*/
+
+/*Отбираем второй список и присвоим ему position: absolute;, зададим минимальную ширину в 150 пик.*/
+/*sub menu*/
+.dws-menu li ul{
+    position: absolute;
+    min-width: 150px;
+   }    
+
+/*Пропишем спискам border в 1 пик.*/
+.dws-menu li > ul li{
+    border: 1px solid #c7c8ca;
+   }    
+
+/*Для ссылок в подменю установим отступы в 10 пик., 
+уберем трансформацию текста и фон сделаем на пару 
+тонов темнее background: #e4e4e5;.*/
+
+.dws-menu li > ul li a{
+    padding: 10px;
+    text-transform: none;
+    background: #e4e4e5;
+   }    
+
+/*Они вывелись, но скрыты под основным меню, 
+теперь position: absolute; вложенного UL и 
+сдвинем его на 150 пик. в сторону:*/
+.dws-menu li > ul li ul{
+    position: absolute;
+    right: -150px;
+    top: 0;
+   }    
+
+/*Далее сделаем появление подменю при наведение на основные пункты верхнего меню, 
+для этого добавляем display: none; и тем самым скрываем все внутренние пункты.*/
+
+.dws-menu li ul{
+    display: none;
+}
+
+/*А для их появления отберем списки при наведении и отобразим их при помощи display: block;.*/
+
+.dws-menu li:hover > ul{
+    display: block;
+   }    
+
