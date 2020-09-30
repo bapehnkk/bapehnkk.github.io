@@ -46,6 +46,15 @@ header{
     text-decoration: none;
     text-transform:uppercase;
    }   
+   .dws-menu > ul li p{
+    display: block;
+    background: #ececed;
+    padding: 15px 30px 15px 40px;
+    font-size: 14px;
+    color: #454547;
+    text-decoration: none;
+    text-transform:uppercase;
+   }   
    
 /*Затем позиционируем иконки, спискам присвоим position: relative; 
 для дальнейшее центровки иконок:*/
@@ -81,10 +90,19 @@ header{
     box-shadow: 1px 5px 10px -5px black;
     transition: all 0.3s ease;
    }    
+   .dws-menu li p:hover{
+    background: #454547;
+    color: #ffffff;
+    box-shadow: 1px 5px 10px -5px black;
+    transition: all 0.3s ease;
+   }    
 
 /*И что бы этот эффект плавно исчезал, добавим этот стиль к ссылке в покое:*/
 
 .dws-menu > ul li a{
+    transition: all 0.3s ease;
+   }    
+   .dws-menu > ul li p{
     transition: all 0.3s ease;
    }    
 
@@ -115,6 +133,11 @@ ul>li*5>a[href="#"]
 тонов темнее background: #e4e4e5;.*/
 
 .dws-menu li > ul li a{
+    padding: 10px;
+    text-transform: none;
+    background: #e4e4e5;
+   }    
+   .dws-menu li > ul li p{
     padding: 10px;
     text-transform: none;
     background: #e4e4e5;
