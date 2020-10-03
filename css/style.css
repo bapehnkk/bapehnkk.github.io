@@ -16,6 +16,7 @@ body {
   opacity: 0.3;
   margin-top: -0.5rem;
   transition: 0.3s;
+  z-index: 100;
 }
 .header:hover{
   position: relative;
@@ -31,6 +32,18 @@ body {
   margin: 0.25rem;
   height: inherit;  
 }
+
+
+canvas{
+  position: absolute;
+  height: 95.9%;
+  width: 100%;
+  opacity: 0.3;
+  z-index: 1;
+}
+article, aside,  figure, footer, header, hgroup, 
+menu, nav, section { display: block; }
+
 
 /*
 li {
