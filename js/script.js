@@ -1,4 +1,3 @@
-
       var canvas = null;
       var context = null;
       var bufferCanvas = null;
