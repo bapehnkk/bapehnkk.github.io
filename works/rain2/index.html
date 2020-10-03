@@ -7,6 +7,8 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <style>
+        html { height: 100%; }
+
         body{
             margin: 0; /* Убираем отступы */
             height: 100%; /* Высота страницы */
@@ -83,12 +85,12 @@
             this.x = Math.round(Math.random() * context.canvas.width);
             this.y = -10;
             this.drift = Math.random();
-            this.speed = Math.round(Math.random() * 5) + 1;
+            this.speed =  7.21;
 
-            this.height = (Math.random() * 3) + 2;
+            this.height = (Math.random() * 3) + 5;
             
             this.width = Math.random() *
-             0.25;
+             0.15;
         }
         function Draw() {
             context.save();
