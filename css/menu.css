@@ -37,7 +37,7 @@ header{
 укажем размер, цвет, уберем подчеркивание, 
 и сделаем заголовки заглавными буквами.*/
 
-.dws-menu > ul li a{
+.dws-menu > ul li a, .dws-menu > ul li p, .dws-menu > ul li audio{
     display: block;
     background: #ececed;
     padding: 15px 30px 15px 40px;
@@ -46,16 +46,7 @@ header{
     text-decoration: none;
     text-transform:uppercase;
    }   
-   .dws-menu > ul li p{
-    display: block;
-    background: #ececed;
-    padding: 15px 30px 15px 40px;
-    font-size: 14px;
-    color: #454547;
-    text-decoration: none;
-    text-transform:uppercase;
-   }   
-   
+
 /*Затем позиционируем иконки, спискам присвоим position: relative; 
 для дальнейшее центровки иконок:*/
 
@@ -84,13 +75,7 @@ header{
 Отбираем ссылки и назначаем цвет блоку, и цвет самой ссылки 
 с иконкой присвоим белый. Давайте добавим еще темную тень. 
 С помощью transition в 0.3 сек сделаем плавное появление:*/
-.dws-menu li a:hover{
-    background: #454547;
-    color: #ffffff;
-    box-shadow: 1px 5px 10px -5px black;
-    transition: all 0.3s ease;
-   }    
-   .dws-menu li p:hover{
+.dws-menu li a:hover, .dws-menu li p:hover, .dws-menu > ul li audio{
     background: #454547;
     color: #ffffff;
     box-shadow: 1px 5px 10px -5px black;
@@ -99,10 +84,7 @@ header{
 
 /*И что бы этот эффект плавно исчезал, добавим этот стиль к ссылке в покое:*/
 
-.dws-menu > ul li a{
-    transition: all 0.3s ease;
-   }    
-   .dws-menu > ul li p{
+.dws-menu > ul li a, .dws-menu > ul li p, .dws-menu > ul li audio{
     transition: all 0.3s ease;
    }    
 
