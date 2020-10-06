@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script language="javascript">
+        function dolg()
+        {
+            //---------================---------
+            //  Сбор данных
+            //---------================---------
+                S = parseFloat(document.calculator.creditSumm.value);
+                P = parseFloat(document.calculator.procent.value);
+                T = parseFloat(document.calculator.term.value);
+            //---------================---------
+            //  Валидация данных
+            //---------================---------
+            if(S <= 0 || P <= 0)
+            {
+                alert("Проверьте сумму кредита или процент годовых!");
+                return; //выйдем из фукции
+            } 
+            else
+            {
+            //---------================---------
+            //  Вычесление результата
+            //---------================---------
+
+                St = (1 + T * P / 1200) * S;
+                Sm = (St / T);
+                O = St - S;
+
+            //---------================---------
+            //  Вывод
+            //---------================---------
+
+            document.calculator.perMonth.value = Sm;
+            document.calculator.totalSumm.value = St;
+            document.calculator.pereplata.value = O;
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <form name="calculator" method="GET" action="">
+        <table>
+            <tr>
+                <td align="right">Сумма кредита:</td>
+                <td align="right"><input type="text" name="creditSumm"/></td>
+                <td>$</td>
+            </tr>
+            <tr>
+                <td align="right">Процент годовых:</td>
+                <td align="right"><input type="text" name="procent"/></td>
+                <td>%</td>
+            </tr>
+            <tr>
+                <td align="right">Срок:</td>
+                <td><select name="term">
+                    <option value="6">6 месяцов</option>
+                    <option value="12">12 месяцов</option>
+                    <option value="18">18 месяцов</option>
+                    <option value="24">2 года</option>
+                    <option value="36">3 года</option>
+                    <option value="60">5 года</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td align="right">Выплата в месяц:</td>
+                <td align="right"><input type="text" name="perMonth"/></td>
+                <td>$</td>
+            </tr>
+            <tr>
+                <td align="right">Общая сумма:</td>
+                <td align="right"><input type="text" name="totalSumm"/></td>
+                <td>$</td>
+            </tr>
+            <tr>
+                <td align="right">Переплата:</td>
+                <td align="right"><input type="text" name="pereplata"/></td>
+                <td>$</td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <input type="button" value="Рассчитать" onclick="dolg()"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <!--
+        S  - сумма кредита
+        P  - процент годовых
+        T  - срок
+        Sm - сумма в месяц
+        St - общая сумма возврата 
+        O  - переплата     
+                 
+        St = (  (T * P) / (12 * 100)  + 1 ) * S
+                
+        Sm = St / T
+
+        O = St - S
+
+        
+    -->
+</body>
+</html>
