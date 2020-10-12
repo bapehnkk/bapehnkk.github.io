@@ -35,7 +35,13 @@
                     break;
                 case 4:
                     // /
-                    rezultat = peremennaja1 / peremennaja2;
+                    if(peremennaja2 == "0")
+                    {
+                        alert("На ноль делить нельзя!");
+                    }else
+                    {
+                    rezultat = peremennaja1 - peremennaja2;
+                    }
                     break;
                 case 5:
                     // ^
@@ -59,7 +65,13 @@
                     break;
                 case 10:
                     // ctg
+                    if(peremennaja1 == "0" || peremennaja2 == "0")
+                    {
+                        alert("Ноль недопустим!");
+                    }else
+                    {
                     rezultat = "A: " + (1 / Math.tan(peremennaja1)).toFixed(2) + " B: " + (1 / Math.tan(peremennaja2)).toFixed(2);
+                    }
                     break;
                 //case 11:
                     // arcctg
