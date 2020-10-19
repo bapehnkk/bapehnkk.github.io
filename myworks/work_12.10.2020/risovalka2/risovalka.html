@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+
+	</style>
+
+	
+<script type="text/javascript" src="Lib.js" ></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="buildCanvas(15,15)">
+<table class="board" id="pole">
+
+</table>
+
+
+
+<div class="picker" id="primary_block" >
+
+	<div id="line">
+	<div id="arrows">
+	<div class="left_arrow"></div>
+	<div class="right_arrow"></div>
+	</div>
+	</div>
+	
+	<div id="block_picker">
+	
+	<img src="bgGradient.png" class="bk_img"><div class="circle" id="circle"></div>
+	</div>
+	<div id="out_color" class="out_color"></div>
+</div>
+	<script type="text/javascript" src="picker.js"></script>
+	<script type="text/javascript">
+	picker.init();
+	</script>
+</body>
+</html>
