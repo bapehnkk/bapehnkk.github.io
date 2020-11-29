@@ -6,77 +6,9 @@
     <title>HTML, CSS, Javascript</title>
     <script src="script.js" language="javascript"></script>
     <link rel="shortcut icon" href="/css/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-
-    <form action="script.js">
-        <label for="lName" >Фамилия</label>
-        <input type="text" name="lName" id="lName" placeholder="Ваша Фамилия"/></br>
-        <label for="fName">Имя</label>
-        <input type="text" name="fName" id="fName" placeholder="Ваше Имя"/></br>
-        <label for="ID">Персональный код</label>
-        <input type="text" name="ID" id="ID" placeholder="38001085718"/></br>
-        <label for="dateBirth">Дата рождения</label>    
-        <input type="date" name="dateBirth" id="dateBirth" min="1930-01-01" onmouseover="dateNowMax(this)"/></br>
-    </br>
-        <input type="radio" name="gender" id="gender" value="1"/>
-          <label for="gender">Мужской</label></br>
-        <input type="radio" name="gender" id="gender" value="2"/>
-        <label for="gender">Женский</label></br>
-        <input type="radio" name="gender" id="gender" value="3"/>
-        <label for="gender">Что-то неопределённое</label></br>
-    </br>
-        <input type="checkbox" name="age" id="age"/>
-        <label for="age">Мне есть 18 лет</label></br>
-    </br>
-        <h3>Ноутбук</h3>
-        <p>Диагональ 15.6 дюйма</p>
-        <p>Разрешение 1920x1080</p>
-        <p>Память DDR4 RAM</p>        
-        <input type="radio" name="videographics" id="videographics" value="1"/>
-        <label for="videographics">Nvidia</label></br>
-        <input type="radio" name="videographics" id="videographics" value="2"/>
-        <label for="videographics">AMD</label></br>
-    </br>
-        <input type="radio" name="dostavka" id="dostavka" value="1"/>
-        <label for="dostavka">прислать по почте</label></br>
-        <input type="radio" name="dostavka" id="dostavka" value="2"/>
-        <label for="dostavka">заберу из почтового автомата</label></br>
-        <input type="radio" name="dostavka" id="dostavka" value="3"/>
-        <label for="dostavka">заберу сам из представительства</label></br>
-    </br>
-        <input type="radio" name="dostavkaKak" id="dostavkaKak" value="1"/>
-        <label for="dostavkaKak">Выбрать почтовый автомат из списка</label></br>
-        <input type="radio" name="dostavkaKak" id="dostavkaKak" value="2"/>
-        <label for="dostavkaKak">Указать адресс доставки</label></br>
-    </br>
-        <label for="dostavkaDataN">Выбор даты начала периода получения товара</label>
-        <input type="date" name="dostavkaDataN" id="dostavkaDataN" onmouseover="dateNowMin(this)"/></br>
-        <label for="dostavkaVremyaN">Выбор времени начала периода получения товара</label>
-        <input type="time" name="dostavkaVremyaN" id="dostavkaVremyaN"/></br>
-    </br>
-        <label for="dostavkaDataK">Выбор даты конца периода получения товара</label>
-        <input type="date" name="dostavkaDataK" id="dostavkaDataK" onmouseover="dateNowMin(this)"/></br>
-        <label for="dostavkaVremyaK">Выбор времени конца периода получения товара</label>
-        <input type="time" name="dostavkaVremyaK" id="dostavkaVremyaK"/></br>
-    </br>
-        <label for="mail">Адрес электронной почты</label>
-        <input type="email" name="mail" id="mail" placeholder="username@example.org"/></br>
-    </br>
-        <label for="telefon">Номер телефона с кодом</label>
-        <input type="tel" name="telefon" id="telefon" pattern="+[0-9]{3}-[0-9]{8}" title="+372 5552456" placeholder="+372 56728545"/></br>
-    </br>
-        <label for="mailD">Дополнительный адрес электронной почты</label>
-        <input type="email" name="mailD" id="mailD" placeholder="username@example.org"/></br>
-    </br>
-        <input type="checkbox" name="soglasije" id="soglasije"/>
-        <label for="soglasije">Согласие с правилами предоставления услуги</label></br>
-    </br>
-        <input type="submit"/>
-        
-    </form>
-
-
+<body>   
 
     <div id="current_date_time_block"></div>
 
@@ -110,6 +42,100 @@
     /* выводим текущую дату и время на сайт в блок с id "current_date_time_block" */
     document.getElementById('current_date_time_block').innerHTML = date_time();
 </script>
+
+    </br>
+
+    <form onsubmit="nazal()">
+        <h3>Персональная информация:</h3>
+        <label for="lName" >Фамилия</label>
+        <input type="text" name="lName" id="lName" placeholder="Ваша Фамилия" onchange="tolkoBukvi('lName')"/></br>
+        <p id="lNameError">В имени могут быть только буквы!</p>
+        <label for="fName">Имя</label>
+        <input type="text" name="fName" id="fName" placeholder="Ваше Имя" onchange="tolkoBukvi('fName')"/></br>
+        <p id="fNameError">В фамилии могут быть только буквы!</p>
+        <label for="ID">Персональный код</label>
+        <input type="text" name="ID" id="ID" placeholder="38001085718" onchange="dlyaID('ID')"/></br> 
+        <p id="IDError">В ID может быть такого ID!</p>
+        <label for="dateBirth">Дата рождения</label>    
+        <input type="date" name="dateBirth" id="dateBirth" min="1900-01-01" onmouseover="dateNowMax(this)"/></br>
+    </br>
+        <input type="radio" name="gender" id="gender" value="1"/>
+          <label for="gender">Мужской</label></br>
+        <input type="radio" name="gender" id="gender" value="2"/>
+        <label for="gender">Женский</label></br>
+        <input type="radio" name="gender" id="gender" value="3"/>
+        <label for="gender">Что-то неопределённое</label></br>
+    </br>
+        <input type="checkbox" name="age" id="age"/>
+        <label for="age">Мне есть 18 лет</label></br>
+    </br>
+    <!--==========================================================================================================================================================-->
+    
+    <!--==========================================================================================================================================================-->
+        <h3>Товар:</h3>
+        <p>Ноутбук</p>
+        <p>Диагональ 15.6 дюйма</p>
+        <p>Разрешение 1920x1080</p>
+        <p>Память DDR4 RAM</p>
+        <label for="videographics">Выбор комплектации (процессор):</label>
+        <select name="videographics" id="videographics" >
+            <option value="Nvidia">Nvidia</option>
+            <option value="AMD">AMD</option>
+        </select></br>        
+    </br>
+    <!--==========================================================================================================================================================-->
+    
+    <!--==========================================================================================================================================================-->
+        <h3>Доставка:</h3>
+        <input type="radio" name="dostavka" id="dostavka1" value="1"/>
+        <label for="dostavka">прислать по почте</label></br>
+        <input type="radio" name="dostavka" id="dostavka2" value="2"/>
+        <label for="dostavka">заберу из почтового автомата</label></br>
+        <input type="radio" name="dostavka" id="dostavka3" value="3" />
+        <label for="dostavka">заберу сам из представительства</label></br>
+    </br>
+        <input type="radio" name="dostavkaKak" id="dostavkaAvtomat" value="1" onchange="dostavkaSposob()"/>
+        <label for="dostavkaKak">Выбрать почтовый автомат из списка</label></br>
+
+        <input type="radio" name="dostavkaKak" id="dostavkaAdress" value="2" onchange="dostavkaSposob()"/>
+        <label for="dostavkaKak">Указать адресс доставки</label></br>
+    </br>
+    <select name="" id="dostavkaAvtomatVarianti">
+        <option value="1">Ahtme Grossi pakiautomaat</option>
+        <option value="2">Antsla Konsumi pakiautomaat</option>
+        <option value="3">Aravete Meie kaupluse pakiautomaat</option>
+    </select>
+    <label for="dostavkaAdress1"  id="dostavkaAdress1">Введите адресс доставки:</label>
+    <input name="dostavkaAdress1" id="dostavkaAdress2" type="text" title="Piibe mnt 16, Aravete, Järvamaa]" placeholder="Piibe mnt 16, Aravete, Järvamaa">
+    </br>
+        <label for="dostavkaDataN">Выбор даты начала периода получения товара</label>
+        <input type="date" name="dostavkaDataN" id="dostavkaDataN" onmouseover="dateNowMin(this)"/></br>
+        <label for="dostavkaVremyaN">Выбор времени начала периода получения товара</label>
+        <input type="time" name="dostavkaVremyaN" id="dostavkaVremyaN"/></br>
+    </br>
+        <label for="dostavkaDataK">Выбор даты конца периода получения товара</label>
+        <input type="date" name="dostavkaDataK" id="dostavkaDataK" onmouseover="dateNowMin(this)"/></br>
+        <label for="dostavkaVremyaK">Выбор времени конца периода получения товара</label>
+        <input type="time" name="dostavkaVremyaK" id="dostavkaVremyaK"/></br>
+    </br>
+        <label for="mail">Адрес электронной почты</label>
+        <input type="email" name="mail" id="mail" placeholder="username@example.org" onchange="checkEmail('mail')"/></br>
+        <p id="mail1">Не верный формат эмаила</p>
+    </br>
+        <label for="telefon">Номер телефона с кодом</label>
+        <input type="tel" name="telefon" id="telefon" pattern="+[0-9]{3}[0-9]{8}" title="+3725552456" placeholder="+37256728545" onchange="checkTel('telefon')"/></br>
+        <p id="telefon1">Не верный формат телефонного номера</p>
+    </br>
+        <label for="mailD">Дополнительный адрес электронной почты</label>
+        <input type="email" name="mailD" id="mailD" placeholder="username@example.org" onchange="checkEmail('mailD')"/></br>
+        <p id="mailD1">Не верный формат эмаила</p>
+    </br>
+        <input type="checkbox" name="soglasije" id="soglasije"/>
+        <label for="soglasije">Согласие с правилами предоставления услуги</label></br>
+    </br>
+        <input type="submit" value="Отправить"/>
+        
+    </form>
 
 </body>
 </html>
