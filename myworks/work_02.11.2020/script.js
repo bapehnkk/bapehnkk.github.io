@@ -570,3 +570,15 @@ window.setInterval(
       displayCanvas();
 	}
   , 1000);
+
+
+function termsChecked()
+{
+	if(document.getElementById("soglasije").checked){
+		document.getElementById("fB").disabled = false;
+	}else{
+		document.getElementById("fB").disabled = true;
+		//errMessage = "Eror!";
+	}
+}
+
