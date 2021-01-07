@@ -6,6 +6,7 @@
     <title>HTML, CSS, Javascript</title>
     <script src="script.js" language="javascript"></script>
     <link rel="shortcut icon" href="/css/img/favicon.ico" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
 </head>
@@ -258,5 +259,48 @@
 <script language="javascript" src="jquery-3.5.1.slim.min.js"></script>
 <script language="javascript" src="popper.min.js"></script>
 <script language="javascript" src="js/bootstrap.min.js"></script>
+        <input type="radio" name="dostavkaKak" id="dostavkaAdress" value="2" onchange="dostavkaSposob()"/>
+        <label for="dostavkaKak">Указать адресс доставки</label></br>
+    </br>
+    <select name="" id="dostavkaAvtomatVarianti">
+        <option value="1">Ahtme Grossi pakiautomaat</option>
+        <option value="2">Antsla Konsumi pakiautomaat</option>
+        <option value="3">Aravete Meie kaupluse pakiautomaat</option>
+    </select>
+    <label for="dostavkaAdress1"  id="dostavkaAdress1">Введите адресс доставки:</label>
+    <input name="dostavkaAdress1" id="dostavkaAdress2" type="text" title="Piibe mnt 16, Aravete, Järvamaa]" placeholder="Piibe mnt 16, Aravete, Järvamaa">
+    </br>
+        <label for="dostavkaDataN">Выбор даты начала периода получения товара</label>
+        <input type="date" name="dostavkaDataN" id="dostavkaDataN" onmouseover="dateNowMin(this)"/></br>
+        <label for="dostavkaVremyaN">Выбор времени начала периода получения товара</label>
+        <input type="time" name="dostavkaVremyaN" id="dostavkaVremyaN"/></br>
+    </br>
+        <label for="dostavkaDataK">Выбор даты конца периода получения товара</label>
+        <input type="date" name="dostavkaDataK" id="dostavkaDataK" onmouseover="dateNowMin(this)"/></br>
+        <label for="dostavkaVremyaK">Выбор времени конца периода получения товара</label>
+        <input type="time" name="dostavkaVremyaK" id="dostavkaVremyaK"/></br>
+    </br>
+        <label for="mail">Адрес электронной почты</label>
+        <input type="email" name="mail" id="mail" placeholder="username@example.org" onchange="checkEmail('mail')"/></br>
+        <p id="mail1">Не верный формат эмаила</p>
+    </br>
+        <label for="telefon">Номер телефона с кодом</label>
+        <input type="tel" name="telefon" id="telefon" pattern="+[0-9]{3}[0-9]{8}" title="+3725552456" placeholder="+37256728545" onchange="checkTel('telefon')"/></br>
+        <p id="telefon1">Не верный формат телефонного номера</p>
+    </br>
+        <label for="mailD">Дополнительный адрес электронной почты</label>
+        <input type="email" name="mailD" id="mailD" placeholder="username@example.org" onchange="checkEmail('mailD')"/></br>
+        <p id="mailD1">Не верный формат эмаила</p>
+    </br>
+        <input type="checkbox" name="soglasije" id="soglasije"/>
+        <label for="soglasije">Согласие с правилами предоставления услуги</label></br>
+    </br>
+        <input type="submit" value="Отправить"/>
+        
+    </form>
+    <script language="javascript" src="jquery-3.5.1.slim.min.js"></script>
+    <script language="javascript" src="popper.min.js"></script>
+    <script language="javascript" src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
