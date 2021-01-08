@@ -172,7 +172,7 @@ terms=Array();
 		document.getElementById("mD1").innerHTML = terms[n][35];
 		document.getElementById("mailD1").innerHTML = terms[n][36];
 		document.getElementById("fin").innerHTML = terms[n][37];
-		document.getElementById("fB").value = terms[n][38];
+		document.getElementById("fB").innerHTML = terms[n][38];
 		////////////////////////////////////		
 		if(n == 1){
 			document.getElementById("est").className += " active";
@@ -574,11 +574,22 @@ window.setInterval(
 
 function termsChecked()
 {
-	if(document.getElementById("soglasije").checked){
+	if(document.getElementById("soglasije").checked)
+	{
 		document.getElementById("fB").disabled = false;
-	}else{
+	}
+	else
+	{
 		document.getElementById("fB").disabled = true;
-		//errMessage = "Eror!";
 	}
 }
 
+function checkAllErrors()
+{
+	if(document.getElementById("soglasije").checked && document.getElementById("lNameError").style.display == "none"&& document.getElementById("fNameError").style.display == "none"&& document.getElementById("res").innerHTML == ""&& document.getElementById("mail1").style.display == "none" && document.getElementById("telefon1").style.display == "none")
+	{
+		document.getElementById("fB").disabled = false;
+	}else{
+		document.getElementById("fB").disabled = true;
+	}
+}

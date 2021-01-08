@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
 </head>
-<body onLoad="tranSlate(0)">
+<body onLoad="tranSlate(0)" onmouseover="checkAllErrors()">
 <div class="container">
     
     <div class="row">
@@ -246,9 +246,7 @@
         </div>
               
         <div class="form-row">
-            <span class="d-inline-block" data-toggle="popover" data-content="Disabled popover">
-                <input class="btn btn-primary" style="pointer-events: none;" type="submit" value="Отправить" id="fB" disabled/>
-            </span>
+            <button type="submit"class="btn btn-primary"  id="fB" disabled></button>
         </div>
 <!-- 
         <label id="uselessSign" for="termsAndConditions">Согласие с правилами предоставления услуги:</label> 
