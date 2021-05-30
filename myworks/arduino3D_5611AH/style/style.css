@@ -17,7 +17,7 @@ body{
     display: block;
     text-align: center;
     background-color: white;
-    width-max: 25hv;
+    max-width: 25hv;
     background-color: #c0c0c0;
     border: 6px solid #6f1414;
     border-radius: 25px;
@@ -36,14 +36,14 @@ body{
     display: block;
     text-align: center;
     background-color: white;
-    width-max: 25hv;
+    max-width: 25hv;
     background-color: #c0c0c0;
     border: 6px solid #6f1414;
     border-radius: 25px;
     opacity: .3;
     transition: 0.3s;
     cursor: pointer;
-    display: none;
+    /*display: none;*/
 }
 
 
@@ -121,12 +121,13 @@ body{
 #inputs {
     position: absolute;
     right: 0;
+    top: 10vh;
     margin: 1vh;
     padding: 1%;
     display: block;
     text-align: center;
     background-color: white;
-    width-max: 25hv;
+    max-width: 25hv;
     background-color: #c0c0c0;
     border: 6px solid #6f1414;
     border-radius: 25px;
