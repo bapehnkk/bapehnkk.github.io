@@ -2,6 +2,7 @@ const module = new function () {
     const module = this;
     const MOUSE_BUTTON = ['left', 'middle', 'right'];
     const loader = new THREE.GLTFLoader();
+    const loaderT = new THREE.TextureLoader();
 
     class model3D {
         constructor(model_name, model_path = './models/5611AH/8/', model_if = false) {
@@ -50,12 +51,18 @@ const module = new function () {
         if (events[evt])
             events[evt](args);
     };
-
+    const material = new THREE.MeshBasicMaterial({
+        map: loaderT.load('m.jpg'),
+      });
     const addCube = this.addCube = (conf) => {
-      let cube = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshPhongMaterial({
-            color: conf.color
-        }
-      ));
+      let cube = new THREE.Mesh(new THREE.BoxGeometry(), //new THREE.MeshPhongMaterial({
+          //  color: conf.color
+        //}
+      //)
+      new THREE.MeshBasicMaterial({
+        map: loaderT.load('./im.png'),
+      })
+      );
       cube.position.copy(conf.position);
       scene.add(cube);
       return cube;
@@ -120,6 +127,7 @@ const module = new function () {
         renderer.render( scene, camera );
         requestAnimationFrame( animate );
     };
+
 
     this.init = (settings) => {
         scene = new THREE.Scene();
