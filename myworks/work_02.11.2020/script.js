@@ -24,9 +24,6 @@ terms=Array();
 	terms[0][19] = "Выбор комплектации (процессор):	";
 	////////////////////////////////////
 	terms[0][20] = "Доставка:";
-	terms[0][21] = "прислать по почте";
-	terms[0][22] = "заберу из почтового автомата";
-	terms[0][23] = "заберу сам из представительства";
 	terms[0][24] = "Выбрать почтовый автомат из списка";
 	terms[0][25] = "Указать адресс доставки";
 	terms[0][26] = "Введите адресс доставки:";
@@ -67,9 +64,6 @@ terms=Array();
 	terms[1][19] = "Konfiguratsiooni valik (protsessor):";
 	////////////////////////////////////
 	terms[1][20] = "Tarne:";
-	terms[1][21] = "saada posti teel";
-	terms[1][22] = "Ma võtan selle pakiautomaadist kätte";
-	terms[1][23] = "Ma võtan selle ise esindusest";
 	terms[1][24] = "Valige loendist pakiautomaat";
 	terms[1][25] = "Täpsustage tarneaadress";
 	terms[1][26] = "Sisesta tarneaadress:";
@@ -110,9 +104,6 @@ terms=Array();
 	terms[2][19] = "Choice of configuration (processor):";
 	////////////////////////////////////
 	terms[2][20] = "Delivery:";
-	terms[2][21] = "send by mail";
-	terms[2][22] = "I will pick it up from the parcel machine";
-	terms[2][23] = "I'll take it myself from the office";
 	terms[2][24] = "Select a parcel machine from the list";
 	terms[2][25] = "Specify delivery address";
 	terms[2][26] = "Enter delivery address:";
@@ -155,9 +146,6 @@ terms=Array();
 		document.getElementById("videographics").innerHTML = terms[n][19]; 
 		////////////////////////////////////
 		document.getElementById("Delivery").innerHTML = terms[n][20];
-		document.getElementById("d1").innerHTML = terms[n][21];
-		document.getElementById("d2").innerHTML = terms[n][22];
-		document.getElementById("d3").innerHTML = terms[n][23];
 		document.getElementById("dK1").innerHTML = terms[n][24];
 		document.getElementById("dK2").innerHTML = terms[n][25];
 		document.getElementById("dostavkaAdress1").innerHTML = terms[n][26];
@@ -592,4 +580,13 @@ function checkAllErrors()
 	}else{
 		document.getElementById("fB").disabled = true;
 	}
+}
+
+function loadNewPage()
+{
+	if( document.getElementById("fB").disabled == true)
+	{
+
+	}
+
 }

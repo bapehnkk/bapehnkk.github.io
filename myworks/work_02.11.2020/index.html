@@ -65,7 +65,7 @@
         </div>
     </div>
 
-  <form onsubmit="nazal1()">  
+  <form onsubmit="nazal1()" method="post" action="hello.html">  
       <!-- <div class="form-row">
         <div class="col-md-6 mb-3">
           <label for="validationServer01">First name</label>
@@ -160,20 +160,7 @@
         <div class="form-row">
           <h3 id="Delivery">Доставка:</h3>
         </div>
-        <div class="form-row">
-            <div class="form-check form-check-inline">
-                <input type="radio" name="dostavka" id="dostavka1" value="1"/>
-                <label for="dostavka" id="d1">прислать по почте</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input type="radio" name="dostavka" id="dostavka2" value="2"/>
-                <label for="dostavka" id="d2">заберу из почтового автомата</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input type="radio" name="dostavka" id="dostavka3" value="3" />
-                <label for="dostavka" id="d3">заберу сам из представительства</label>
-            </div>
-        </div>
+
         <div class="form-row">
             <div class="form-check form-check-inline">
                 <input type="radio" name="dostavkaKak" id="dostavkaAvtomat" value="1" onchange="dostavkaSposob()"/>
@@ -246,17 +233,9 @@
         </div>
               
         <div class="form-row">
-            <button type="submit"class="btn btn-primary"  id="fB" disabled></button>
+            <button type="submit"class="btn btn-primary" onclick="loadNewPage()" id="fB" disabled></button>
         </div>
-<!-- 
-        <label id="uselessSign" for="termsAndConditions">Согласие с правилами предоставления услуги:</label> 
-		<input type="checkbox" id="termsAndConditions" name="termsAndConditions" value="Terms" " required><br><br> -->
 
-		<!--<input type="button" class="btn" value="Подтвердить" onclick="termsChecked()" id="btnToDis" disabled>--><!-- 
-		<button type="button" class="btn btn-primary col-12" onClick="CheckThisOut()" id="btnToDis" disabled>Подтвердить</button> -->
-
-<!--                  <input type="submit" value="Отправить" id="fB"/>
- -->      
   </form>
 
 </div>
