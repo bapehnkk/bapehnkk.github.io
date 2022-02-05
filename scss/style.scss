@@ -1,0 +1,10 @@
+@import "_zeroing";
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+@import "_header";
+@import "_main";
+@import "_footer";

@@ -1,0 +1,92 @@
+html { height: 100%; }
+body {
+ margin: 0; /* Убираем отступы */
+ height: 100%; /* Высота страницы */
+ background: url(img/background.jpg) no-repeat; /* Параметры фона */
+ background-size: cover;
+ background-position: center center;
+ background-attachment: fixed;
+ font-family: 'Seymour One', sans-serif;
+}
+
+.header{
+  position: fixed;
+  width: 100%;
+  height: 3rem;
+  display: block;
+  background-color: #fff;
+  opacity: 0.3;
+  margin-top: -0.5rem;
+  transition: 0.3s;
+  z-index: 100;
+}
+.header:hover{
+  position: fixed;
+  width: 100%;
+  height: 7rem;
+  display: block;
+  background-color: #fff;
+  opacity: 0.9;
+  border-radius: 1rem;
+  margin-top: -1rem;
+}
+.logo{
+  margin: 0.25rem;
+  height: inherit;  
+}
+
+
+canvas{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0.3;
+  z-index: 1;
+}
+article, aside,  figure, footer, header, hgroup, 
+menu, nav, section, footer { display: block; }
+
+
+/*
+li {
+  list-style-type: none; /* Убираем маркеры *//*
+ }
+ ul {
+  padding-left: 0; /* Сдвигаем список влево *//*
+  margin: 0 auto;
+ }
+
+
+a {
+  text-decoration: none;
+  transition: .5s linear;
+}
+
+
+nav {
+  display: block;
+  width: min-content;
+  display: block; /* смещает только блоки */ /*
+  margin-left: auto;
+}
+
+
+.four ul {
+  display: -webkit-flex; 
+  display: flex;
+  background: #a7d4ff;
+  padding-left: 0;
+}
+.four a {
+  padding: 1em;
+  display: block;
+  color: #22939b;
+  border-right: 1px solid #4da9ce;
+  background: rgba(81, 229, 255, 0.3);
+  height: 1rem;
+
+}
+.four a:hover {
+  background: #4da9ce;
+  height: 5rem;
+}*/

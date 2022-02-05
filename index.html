@@ -1,221 +1,184 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet"/>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
-    <meta property="og:title" content="BAPEHNKK's website" />
-    <meta property="og:url" content="https://bapehnkk.github.io/" />
-    <meta property="og:image" content="/css/img/logo.png" />
-    <meta name="description" content="bapehnkk">
-    <meta name="keywords" content="bapehnkk">
-    <meta name="author" content="bapehnkk">
-    <title>BAPEHNKK's website</title>
-    
-    <link rel="stylesheet" href="css/style.css">    
-    <link rel="stylesheet" href="css/menu.css">    
-    <link rel="shortcut icon" href="/css/img/favicon.ico" type="image/x-icon">
+    <title>BAPEHNKK's githb</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 
-
-
-  <script type="text/javascript">
-      var canvas = null;
-      var context = null;
-      var bufferCanvas = null;
-      var bufferCanvasCtx = null;
-      var flakeArray = [];
-      var flakeTimer = null;
-      var maxFlakes = 500; // Here you may set max flackes to be created 
-  
-      function init() {
-          //Canvas on Page
-          canvas = document.getElementById('canvasRain');
-          context = canvas.getContext("2d");
-          //Buffer Canvas
-          bufferCanvas = document.createElement("canvas");
-          bufferCanvasCtx = bufferCanvas.getContext("2d");
-          bufferCanvasCtx.canvas.width = context.canvas.width;
-          bufferCanvasCtx.canvas.height = context.canvas.height;
-  
-          
-          flakeTimer = setInterval(addFlake, 200);
-  
-          Draw();
-  
-          setInterval(animate, 30);
-           
-      }
-      function animate() {
-          
-          Update();
-          Draw();
-          
-      }
-      function addFlake() {
-  
-          flakeArray[flakeArray.length] = new Flake();
-          if (flakeArray.length == maxFlakes)
-              clearInterval(flakeTimer);
-      }
-      function blank() {
-          bufferCanvasCtx.fillStyle = "rgba(0,0,0,0.8)";
-          bufferCanvasCtx.fillRect(0, 0, bufferCanvasCtx.canvas.width, bufferCanvasCtx.canvas.height);
-          
-      }
-      function Update() {
-          for (var i = 0; i < flakeArray.length; i++) {
-              if (flakeArray[i].y < context.canvas.height) {
-                  flakeArray[i].y += flakeArray[i].speed;
-                  if (flakeArray[i].y > context.canvas.height)
-                      flakeArray[i].y = -5;
-                  flakeArray[i].x += flakeArray[i].drift;
-                  if (flakeArray[i].x > context.canvas.width)
-                      flakeArray[i].x = 0;
-              }
-          }
-          
-      }
-      function Flake() {
-          this.x = Math.round(Math.random() * context.canvas.width);
-          this.y = -10;
-          this.drift = Math.random();
-          this.speed =  7.21;
-
-          this.height = (Math.random() * 3) + 5;
-          
-          this.width = Math.random() *
-           0.15;
-      }
-      function Draw() {
-          context.save();
-          
-          blank();
-  
-          for (var i = 0; i < flakeArray.length; i++) {
-              bufferCanvasCtx.fillStyle = "white";
-              bufferCanvasCtx.fillRect(flakeArray[i].x, flakeArray[i].y, flakeArray[i].width, flakeArray[i].height);
-          }
-  
-          
-          context.drawImage(bufferCanvas, 0, 0, bufferCanvas.width, bufferCanvas.height);
-          context.restore();
-      }
-    
-  </script>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet" />
+    <!-- styles -->
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-<body  onload="init()">
-    
-  <div class="header">
-  <header>
-    <nav class="dws-menu" align="right">
 
-      <ul>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__body">
+                    <a href="/" class="header__logo">
+                        <img src="img/logo_1.jpg" alt="" />
+                    </a>
+                    <div class="header__burger">
+                        <span></span>
+                    </div>
+                    <nav class="header__menu">
+                        <ul class="header__list">
+                            <li>
+                                <a href="/" class="header__link">Home</a>
+                            </li>
+                            <li>
+                                <a href="#projects" class="header__link">My projects</a>
+                            </li>
+                            <li>
+                                <a href="#about" class="header__link">About mee</a>
+                            </li>
+                            <li>
+                                <a href="#" class="header__link">Squaresa</a>
+                            </li>
+                            <li>
+                                <a href="#contacts" class="header__link">Contacts</a>
+                            </li>
+                            <li>
+                                <a href="old_page/index.html" class="header__link">Old page</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
-        <li><p>Задания</p>
-          <ul>
-            <li><a href="myworks/table/table.html">Table</a></li>
-            <li><a href="myworks/work_09.09.2020/index.html">09.09.2020</a></li>
-            <li><a href="myworks/work_14.09.2020/index.html">14.09.2020</a>
-              <ul><li><a href="myworks/work_14.09.2020/lukomorje.html">Лукоморье</a></li></ul>
-            </li>
-            <li><p>work_28.09.2020</p>
-                <ul>
-                  <li><a href="myworks/work_28.09.2020/chess/index.html">chess</a></li>
-                  <li><a href="myworks/work_28.09.2020/div/index.html">div</a></li>
-                  <li><a href="myworks/work_28.09.2020/loc/index.html">loc</a></li>
-                </ul>
-            </li>
-            <li><p>work_05.10.2020</p>
-              <ul>
-                <li><a href="myworks/work_05.10.2020/homework.html">Calculator</a></li>
-                <li><a href="myworks/work_05.10.2020/index.html">Credit calc.</a></li>
-                <li><a href="myworks/work_05.10.2020/work1.html">Работа</a></li>
-              </ul>
-            </li>
-            <li><p>work_12.10.2020</p>
-              <ul>
-                <li><a href="myworks/work_12.10.2020/risovalka1/risovalka.html">risovalka1</a></li>
-                <li><a href="myworks/work_12.10.2020/risovalka2/risovalka.html">risovalka2</a></li>
-                <li><a href="myworks/work_12.10.2020/risovalka2/orig.html">палитра</a></li>
-              </ul>
-            </li>
-            <li><p>work_19.10.2020</p>
-              <ul>
-                <li><a href="myworks/work_19.10.2020/work1/Bootstrap/index.html">Bootstrap</a></li>
-                <li><a href="myworks/work_19.10.2020/work2/fly.html">муха</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="myworks/arduino_modules_homework/index.html">Arduino</a>
-            </li>
-            <li>
-              <a href="myworks/work_02.11.2020/index.html">02.11.2020</a>
-            </li>
-            <li>
-              <a href="myworks/work_25.02.2021/index.html">25.02.2021</a>
-            </li>
-            <li>
-              <a href="myworks/work_03.03.2021/index.html">03.03.2021</a>
-            </li>
-            <li>
-              <a href="myworks/arduino3D_5611AH/">arduino3D_5611AH</a>
-            </li>
-          </ul>
-        </li>
+        <div class="main">
+            <div class="play-button">
+                <a href="#" class="play-button__button">
+                    <img class="play-button__img" src="img/aim.png" alt="">
+                    <p>Play</p>
+                </a>
+            </div>
 
-        <li>
-          <p>Музычка</p>
-          <ul>
-            <li>
-              <audio controls title="Проклятый старый дом">
-                <source src="sounds/kish.mp3"/>
-                <p>Ваш браузер не поддерживает аудио</p>
-                </audio>
-            </li>
-            <li>
-              <audio title="Звуки дождя" controls>
-                <source src="sounds/groza-i-prolivnoy-dojd.mp3" type="audio/mpeg" />
-                <p>Ваш браузер не поддерживает аудио</p>
-                </audio>
-            </li>
-          </ul>
-        </li>
+            <h3 id="projects" class="main__h">My works</h3>
+            <ul class="container__cards">
+                <li class="container__card"><img src="img/works/table_css.png" alt=""><a target="__blank" href="myworks/table/table.html">(Old school work)<br>Table</a></li>
+                <li class="container__card"><img src="img/works/ky-008.png" alt=""><a target="__blank" href="myworks/work_09.09.2020/index.html">(Old school work)<br>09.09.2020</a></li>
+                <li class="container__card"><img src="img/works/no_img.png" alt=""><a target="__blank" href="myworks/work_14.09.2020/index.html">(Old school work)<br>14.09.2020</a></li>
+                <li class="container__card"><img src="img/works/no_img.png" alt=""><a target="__blank" href="myworks/work_14.09.2020/lukomorje.html">(Old school work)<br>Лукоморье</a></li>
+                <li class="container__card"><img src="img/works/chess.png" alt=""><a target="__blank" href="myworks/work_28.09.2020/chess/index.html">(Old school work)<br> chess <br>(just div)</a></li>
+                <li class="container__card"><img src="img/works/no_img.png" alt=""><a target="__blank" href="myworks/work_28.09.2020/div/index.html">(Old school work)<br>div</a></li>
+                <li class="container__card"><img src="img/works/monolit.png" alt=""><a target="__blank" href="myworks/work_28.09.2020/loc/index.html">(Old school work)<br>loc</a></li>
+                <li class="container__card"><img src="img/works/easy_calc.png" alt=""><a target="__blank" href="myworks/work_05.10.2020/homework.html">(Old school work)<br>Easy calc</a></li>
+                <li class="container__card"><img src="img/works/credit_calc.png" alt=""><a target="__blank" href="myworks/work_05.10.2020/index.html">(Old school work)<br>Credit calc.</a></li>
+                <li class="container__card"><img src="img/works/kasutaja.png" alt=""><a target="__blank" href="myworks/work_05.10.2020/work1.html">(Old school work)<br>Работа</a></li>
+                <li class="container__card"><img src="img/works/risovalka_1.png" alt=""><a target="__blank" href="myworks/work_12.10.2020/risovalka1/risovalka.html">(Old school work)<br>risovalka1</a></li>
+                <li class="container__card"><img src="img/works/risovalka_2.png" alt=""><a target="__blank" href="myworks/work_12.10.2020/risovalka2/risovalka.html">(Old school work)<br>risovalka2</a></li>
+                <li class="container__card"><img src="img/works/palette.png" alt=""><a target="__blank" href="myworks/work_12.10.2020/risovalka2/orig.html">палитра</a></li>
+                <li class="container__card"><img src="img/works/bootstrap.png" alt=""><a target="__blank" href="myworks/work_19.10.2020/work1/Bootstrap/index.html">(Old school work)<br>Bootstrap</a></li>
+                <li class="container__card"><img src="img/works/fly.jpg" alt=""><a target="__blank" href="myworks/work_19.10.2020/work2/fly.html">(Old school work)<br>муха</a></li>
+                <li class="container__card"><img src="img/works/arduino_modules.png" alt=""><a target="__blank" href="myworks/arduino_modules_homework/index.html">(Old school work)<br>Arduino</a></li>
+                <li class="container__card"><img src="img/works/form.png" alt=""><a target="__blank" href="myworks/work_02.11.2020/index.html">(Old school work)<br>02.11.2020</a></li>
+                <li class="container__card"><img src="img/works/X_vs_0.png" alt=""><a target="__blank" href="myworks/work_25.02.2021/index.html">(Old school work)<br>25.02.2021 <br>X VS 0</a></li>
+                <li class="container__card"><img src="img/works/xml_reader.png" alt=""><a target="__blank" href="myworks/work_03.03.2021/index.html">(Old school work)<br>03.03.2021 XML js Reader</a></li>
+                <li class="container__card"><img src="img/works/arduino3D_5611AH.png" alt=""><a target="__blank" href="myworks/arduino3D_5611AH/">(Old school work)<br>arduino3D_5611AH</a></li>
+                <li class="container__card"><img src="img/works/slider.jpg" alt="">
+                    <a target="__blank" href="https://github.com/bapehnkk/arduino_slider_mk-3_Fed">It's school projects
+                        on arduino (Arduino Slider).</a>
+                </li>
+            </ul>
+            <div id="about" class="about">
+                <h3 class="main__h">About me</h3>
+                <div class="main__text">
+                    I am a student of the Tallinn Polytechnic. I'll become a Junior Full Stack Developer one day. At the moment I mastered:
+                    <ul>
+                        <li>Python
+                            <ul>
+                                <li>Django</li>
+                            </ul>
+                        </li>
+                        <li>Html/Css
+                            <ul>
+                                <li>SASS</li>
+                                <li>SCSS</li>
+                                <li>Bootstrap</li>
+                                <li>BEM</li>
+                            </ul>
+                        </li>
+                        <li>JS
+                            <ul>
+                                <li>Node</li>
+                                <li>Three.js</li>
+                                <li>JQuery</li>
+                                <li>Vue</li>
+                                <li>React</li>
+                            </ul>
+                        </li>
+                        <li>C#
+                            <ul>
+                                <li>Unity</li>
+                                <li>tModLoader (Terraria mods)</li>
+                            </ul>
+                        </li>
+                        <li>PHP
+                            <ul>
+                                <li>Laravel</li>
+                            </ul>
+                        </li>
+                        <li>Java
+                            <ul>
+                                <li>Android Studio</li>
+                            </ul>
+                        </li>
+                        <li>Arduino</li>
+                        <li>Ruby</li>
+                        <li>Rust</li>
+                        <li>SQLite</li>
+                        <li>MySQL</li>
+                        <li>PostgreSQL</li>
+                        <li>Access</li>
+                        <li>Photoshop</li>
+                        <li>Blender</li>
+                        <li>Fusion 360</li>
+                        <li>Aserprite</li>
+                        <li>yEd</li>
+                        <li>DrawIO</li>
+                        <li>Adobe XD</li>
+                    </ul>
 
-        <li><a href="https://yummyanime.com/">yummyanime</a></li>
+                    <ul>
+                        <li></li>
+                    </ul>
 
-        <li>
-          <p>Справочные материалы</p>
-          <ul>
-            <li><p>Сайты</p>
-              <ul>
-                <li><a target="_blank" href="http://scrumpoker.eu/oppeained/veebirakenduste-alused/">scrumpoker.eu</a></li>
-                <li><a target="_blank" href="https://fontawesome.com/icons?d=gallery">fontawesome.com</a></li>
-                <li><a target="_blank" href="https://webref.ru/">webref.ru</a></li>
-                <li><a target="_blank" href="http://htmlbook.ru/">htmlbook.ru</a></li>
-                <li><a target="_blank" href="https://metanit.com/">metanit.com</a></li>
-                <li><a target="_blank" href="https://howdyho.net/">howdyho.net</a></li>
-                <li><a target="_blank" href="https://html5css.ru/">html5css.ru</a></li>
-                <li><a target="_blank" href="https://fonts.google.com/">fonts.google.com</a></li>
-                <li><a target="_blank" href="https://codepen.io/arickle/pen/XKjMZY">анимация дождя</a></li>
-                <li><a href="https://bootstrap-4.ru/" target="_blank">bootstrap</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
 
-      </ul>
+                </div>
+            </div>
 
-    </nav>
+        </div>
+        <footer id="contacts" class="footer">
+            <ul class="footer__block">
+                <li class="footer__links">
+                    <a target="__blank" href="https://www.tptlive.ee/">My Polytechnic</a>
+                </li>
+                <li class="footer__links">
+                    <a target="__blank" href="https://github.com/bapehnkk">My Github</a>
+                </li>
+            </ul>
+            <ul class="footer__block">
+                <li class="footer__links">
+                    <a target="__blank" href="https://vk.com/bapehnkk">My VK</a>
+                </li>
+                <li class="footer__links">
+                    <a target="__blank" href="https://www.facebook.com/BAPEHNKK/">My Facebook</a>
+                </li>
+                <li class="footer__links">
+                    <a target="__blank" href="https://www.instagram.com/bapehnkk/">My Instagram</a>
+                </li>
+            </ul>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
- </header>
-
-  <img class="logo" src="css/img/logo.png" alt="" align="right" >
-
-  </div>
-    
-  <canvas  id="canvasRain">Canvas Not Supported</canvas>
-
+        <script src="js/script.js"></script>
 </body>
+
 </html>
