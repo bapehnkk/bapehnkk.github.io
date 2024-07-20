@@ -1,0 +1,127 @@
+.taskbar {
+  @apply w-full bg-gray-900 text-white h-16 fixed bottom-0 flex items-center px-4 justify-start;
+  z-index: 100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 100%;
+}
+
+.startButton {
+  @apply flex items-center cursor-pointer relative w-10 h-10 p-2 rounded;
+  box-sizing: border-box;
+  transition: .3s all ease;
+  &:hover {
+    @apply bg-gray-600;
+  }
+}
+
+.windowsIcon {
+  @apply w-6 h-6;
+}
+
+.windowsContainer {
+  @apply flex items-center overflow-x-auto mx-5;
+}
+
+.windowsContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.windowsContainer::-webkit-scrollbar-thumb {
+  background-color: #4a5568;
+  border-radius: 10px;
+}
+
+.windowsContainer::-webkit-scrollbar-track {
+  background-color: #2d3748;
+}
+
+.windows {
+  @apply flex whitespace-nowrap;
+}
+
+.taskbarIcon {
+  @apply mr-2 p-2 flex items-center  rounded cursor-pointer transition-colors duration-300 justify-start h-10 relative;
+  box-sizing: border-box;
+  transition: .3s all ease;
+
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-radius: 1rem;
+    height: 3px;
+    bottom: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: .3s all ease;
+    @apply bg-white;
+  }
+
+  &:hover {
+    @apply bg-gray-600;
+
+    &::after {
+      width: 60%;
+
+    }
+  }
+}
+
+.activeWindow {
+  @apply bg-gray-700 ;
+
+  &::after {
+    width: 40%;
+  }
+
+
+}
+
+.windowIcon {
+  @apply mr-2;
+}
+
+.taskbarRight {
+  @apply flex items-center ml-auto;
+}
+
+
+.clock {
+  @apply mr-2;
+
+  @apply cursor-pointer p-2 rounded;
+  transition: .3s all ease;
+
+  &:hover {
+    @apply bg-gray-600;
+  }
+}
+
+
+
+.notifications {
+  @apply fixed bottom-[4.5rem] right-4 bg-gray-800 text-white p-4 rounded-lg shadow-lg;
+  width: 250px;
+}
+
+.notification {
+  @apply flex items-center mb-2 p-2 bg-gray-700 rounded;
+}
+
+.notificationIcon {
+  @apply w-10 h-10 mr-4 cursor-pointer p-3 rounded;
+  transition: .3s all ease;
+
+  &:hover {
+    @apply bg-gray-600;
+  }
+}
+
+.notification strong {
+  @apply block text-sm;
+}
+
+.notification p {
+  @apply text-xs;
+}

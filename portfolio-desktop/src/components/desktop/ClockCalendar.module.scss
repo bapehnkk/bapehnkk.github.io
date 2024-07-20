@@ -1,0 +1,37 @@
+.clockCalendar {
+  @apply p-4 bg-gray-800 text-white rounded-lg shadow-lg absolute bottom-[4.5rem] right-4;
+  z-index: 200;
+
+  .time {
+    @apply text-3xl mb-4;
+  }
+
+  .react-calendar {
+    @apply bg-gray-800 text-white rounded-lg;
+    border: none;
+
+    .react-calendar__tile {
+      @apply text-white;
+    }
+
+    .react-calendar__tile--active {
+      @apply bg-gray-600 text-white;
+    }
+
+    .react-calendar__tile--now {
+      @apply bg-gray-700 text-white;
+    }
+
+    .react-calendar__tile:hover {
+      @apply bg-gray-700;
+    }
+
+    .react-calendar__month-view__weekdays {
+      @apply text-gray-400;
+    }
+
+    .react-calendar__navigation button {
+      @apply text-white;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.calendar {
+  @apply bg-gray-800 text-white rounded-lg p-4;
+
+  .header {
+    @apply flex justify-between items-center mb-4;
+
+    button {
+      @apply bg-gray-700 text-white p-2 rounded-md cursor-pointer hover:bg-gray-600;
+    }
+  }
+
+  .daysOfWeek {
+    @apply grid grid-cols-7 gap-2 mb-2;
+
+    .dayOfWeek {
+      @apply text-center font-semibold;
+    }
+  }
+
+  .days {
+    @apply grid grid-cols-7 gap-2;
+
+    .day {
+      @apply text-center p-2 bg-gray-700 rounded-md cursor-pointer hover:bg-gray-600;
+    }
+
+    .empty {
+      @apply p-2;
+    }
+  }
+}

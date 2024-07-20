@@ -1,0 +1,17 @@
+.icon {
+  @apply p-4 text-center absolute cursor-pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &-image {
+    @apply w-16 h-16 mb-2 object-contain;
+  }
+
+  &-name {
+    @apply mt-2 text-white;
+  }
+}

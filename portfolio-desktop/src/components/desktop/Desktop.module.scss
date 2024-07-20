@@ -1,0 +1,17 @@
+.desktop {
+  @apply w-full h-screen relative;
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+.grid-cell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

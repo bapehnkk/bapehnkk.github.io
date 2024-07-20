@@ -1,0 +1,13 @@
+.sleepScreen {
+  @apply fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center ;
+  z-index: 1000;
+
+}
+
+.lockScreen {
+  @apply w-full h-full bg-cover bg-center relative;
+}
+
+.arrow {
+  @apply absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-4xl cursor-pointer;
+}

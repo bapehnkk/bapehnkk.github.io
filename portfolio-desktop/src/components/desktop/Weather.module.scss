@@ -1,0 +1,11 @@
+.weather {
+  @apply flex items-center text-white mr-4;
+
+  .icon {
+    @apply mr-2 text-lg;
+  }
+
+  .temperature {
+    @apply text-lg;
+  }
+}

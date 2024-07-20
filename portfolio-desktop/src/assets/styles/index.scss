@@ -1,0 +1,13 @@
+@import 'tailwind.scss';
+
+html {
+  overflow: hidden;
+}
+
+body {
+  @apply bg-gray-100 text-gray-900 overflow-hidden;
+  * {
+    user-select: none;
+  }
+}
+

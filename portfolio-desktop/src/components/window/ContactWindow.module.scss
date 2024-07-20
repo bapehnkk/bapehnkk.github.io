@@ -1,0 +1,86 @@
+.contactWindow {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+
+  h2 {
+    margin-bottom: 20px;
+    color: #0073b1;
+  }
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #005f8d;
+  }
+
+  p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  a {
+    color: #0073b1;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .contactInfo,
+  .socialMedia {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      a {
+        margin-left: 5px;
+        color: #0073b1;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    svg {
+      margin-right: 10px;
+      color: #0073b1;
+    }
+  }
+
+  .location {
+    margin: 20px 0;
+
+    p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    svg {
+      margin-right: 10px;
+      color: #0073b1;
+    }
+  }
+
+  .faq,
+  .career {
+    margin: 20px 0;
+
+    a {
+      color: #0073b1;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

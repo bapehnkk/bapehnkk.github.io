@@ -1,0 +1,47 @@
+.startMenu {
+  @apply bg-gray-800 text-white p-4 fixed bottom-[4.5rem] left-4 w-64;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 60;
+  border-radius: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.menuSection {
+  @apply mb-4;
+}
+
+.userInfo {
+  @apply flex items-center mb-4;
+}
+
+.userAvatar {
+  @apply w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center mr-2;
+}
+
+.userName {
+  @apply text-lg;
+}
+
+.menuItems {
+  @apply mb-4;
+}
+
+.menuItem {
+  @apply p-2 flex items-center hover:bg-gray-700 cursor-pointer rounded-md;
+}
+
+.menuItemIcon {
+  @apply w-5 h-5 mr-3;
+}
+
+.powerOptions {
+  @apply border-t border-gray-600 pt-2;
+}
+
+.powerOption {
+  @apply p-2 flex items-center hover:bg-gray-700 cursor-pointer rounded-md;
+}
+
+.powerOptionIcon {
+  @apply w-5 h-5 mr-3;
+}

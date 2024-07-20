@@ -1,0 +1,72 @@
+// ProjectsWindow.module.scss
+.projectsWindow {
+  padding: 20px;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.learnMoreButton {
+  margin-top: auto;
+}
+
+.projectDetail {
+  padding: 20px;
+}
+
+.backButton {
+  margin-bottom: 20px;
+}
+
+.projectSwiper {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+.mySwiper2 {
+  height: 80%;
+  width: 100%;
+}
+
+.mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.projectLink {
+  display: inline-block;
+  margin-top: 20px;
+  color: #1976d2;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,76 @@
+.aboutWindow {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+
+  h2, h3, h4 {
+    color: #0073b1;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+
+  p, ul {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    svg {
+      margin-right: 10px;
+      color: #0073b1;
+    }
+  }
+
+  .skills {
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        width: 50%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+}
