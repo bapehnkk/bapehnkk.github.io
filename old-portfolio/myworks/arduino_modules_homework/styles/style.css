@@ -1,0 +1,25 @@
+#Step_im{
+    background: rgba(231, 235, 238, 0.959);
+    background-size: cover; 
+    min-height: 10rem;
+    padding: 1%;
+    transition: 0.9s;
+}
+#Step_im_isOpen{
+    background: rgba(231, 235, 238, 0.959);
+    transition: 0.9s;
+}
+
+#Step_im:hover  , #Step_im_isOpen:hover{
+    background: rgba(147, 184, 212, 0.959);
+    transition: 0.9s;
+}
+img{
+    padding: 0!important;
+}
+body{    
+    background: rgba(231, 235, 238, 0.959);
+}
+body{
+    font-family: 'El Messiri', sans-serif;
+}

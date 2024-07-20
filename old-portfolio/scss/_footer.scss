@@ -1,0 +1,29 @@
+/* footer */
+
+.footer {
+    width: 100%;
+    min-height: 60px;
+    background: #222222;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    &__block {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+    }
+    &__links {
+        display: flex;
+        a {
+            color: #fff;
+            font-size: 1.2em;
+            transition: all 0.3s ease 0s;
+            margin: .3em;
+        }
+        a:hover {
+            color: #f0a1a1;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="/css/img/favicon.ico" type="image/x-icon">
+    <title>Table</title>
+</head>
+<body>
+    <table border="1" cellspacing = "0" callpadding = "0" bgcolor = "#8A2BE2">
+        <tr><td colspan="2" rowspan="2">1</td><td width = "100px" height = "100px">2</td><td rowspan="3" width = "100px">3</td><td colspan="2" rowspan="2">4</td></tr>
+        <tr><td height = "100px">5</td></tr>
+        <tr  bgcolor = "#DC143C"><td colspan="2" rowspan="2">6</td><td height = "100px">7</td><td colspan="2">8</td></tr>
+        <tr><td rowspan="2">9</td><td rowspan="2">10</td><td colspan="2" height = "200px">11</td></tr>
+        <tr  bgcolor = "blue"><td width = "100px" height = "200px">12</td><td  width = "100px">13</td><td width = "120px">14</td><td rowspan="2" width = "150px">15</td></tr>
+        <tr><td colspan="2" height = "230px">16</td><td>17</td><td>18</td><td>19</td></tr>
+    </table>
+    <!--
+rowspap вниз
+colspan вбок
+    -->
+    <h3></h3>
+    <table  style="border:5px solid black;" cellspacing = "0" callpadding = "0">
+        <tr><td style="border:5px solid black;" rowspan="2" width="100px" height="200px" bgcolor="#DD5145">1</td><td bgcolor="#EBBE40" style="border:5px solid black;" colspan="2" width="200px" height="100px">2</td></tr>
+        <tr><td style="border:5px solid black;" height="100px"width="100px">3</td><td style="border:5px solid black;" rowspan="2"width="100px" height="200px" bgcolor="#4989F4">4</td></tr>
+        <tr><td style="border:5px solid black;" colspan="2"width="200px" height="100px" bgcolor="#1BA160">5</td></tr>
+    </table>
+
+    <h3>
+
+    </h3>
+    <table style="border:5px solid black;" cellspacing = "0" callpadding = "0">
+        <tr><td style="border:5px solid black;" colspan="2" height="100px" bgcolor="#CACED7"></td><td style="border:5px solid black;" colspan="2" bgcolor="#D4D4D2"></td><td style="border:5px solid black;" colspan="2" bgcolor="#E4BD54"></td><td style="border:5px solid black;" rowspan="4" bgcolor="#CDCDD7"></td></tr>
+        <tr><td style="border:5px solid black;"" bgcolor="#E4E1DA"></td><td style="border:5px solid black;" colspan="3" rowspan="2"  width="400px" height="400px" bgcolor="#C24737"></td><td style="border:5px solid black;" colspan="2" bgcolor="#E2BF59"></td></tr>
+        <tr><td style="border:5px solid black;" rowspan="2" bgcolor="#CED3D9"></td><td style="border:5px solid black;" width="125px" bgcolor="#D6D6D4"></td><td style="border:5px solid black;" bgcolor="#D4D4D6"></td></tr>
+        <tr><td style="border:5px solid black;" width="100px" height="100px" bgcolor="#1D2018"></td><td style="border:5px solid black;" width="100px" height="100px" bgcolor="#1C1F18"></td><td style="border:5px solid black;" width="200px" height="100px" bgcolor="#BABEC7"></td><td style="border:5px solid black;" colspan="2" bgcolor="#D8D8D8"></td></tr>
+        <tr>
+            <td style="border:5px solid black;" rowspan="3" width="100px" bgcolor="#DFB850"></td>
+            <td style="border:5px solid black;" width="100px" height="100px" bgcolor="#161710"></td>
+            <td style="border:5px solid black;" width="100px" height="100px" bgcolor="#121E15"></td>
+            <td style="border:5px solid black;" width="200px" height="100px" bgcolor="#B9BDC7"></td>
+            <td style="border:5px solid black;" colspan="2" rowspan="2" width="250px" bgcolor="#21406E"></td>
+            <td style="border:5px solid black;" rowspan="3" width="50px" bgcolor="#B74534"></td>
+        </tr>
+        <tr><td style="border:5px solid black;" colspan="2" rowspan="2" bgcolor="#CBCBCB"></td>
+            <td style="border:5px solid black;" width="200px" height="50px" bgcolor="#0F160F"></td>
+        </tr>
+        <tr><td style="border:5px solid black;" colspan="3" width="450px" height="50px" bgcolor="#CBCBD0"></td></tr>
+    </table>
+
+    <!-- 
+    <table border="10" cellspacing = "0" callpadding = "0">
+        <tr ><td colspan="2" height="100px" bgcolor="#CACED7">1</td><td colspan="2" bgcolor="#D4D4D2">2</td><td colspan="2" bgcolor="#E4BD54">3</td><td rowspan="4" bgcolor="#CDCDD7">4</td></tr>
+        <tr><td bgcolor="#E4E1DA">5</td><td colspan="3" rowspan="2"  width="400px" height="400px" bgcolor="#C24737">6</td><td colspan="2" bgcolor="#E2BF59">7</td></tr>
+        <tr><td rowspan="2" bgcolor="#CED3D9">8</td><td width="125px" bgcolor="#D6D6D4">9</td><td bgcolor="#D4D4D6">10</td></tr>
+        <tr><td width="100px" height="100px" bgcolor="#1D2018">11</td><td width="100px" height="100px" bgcolor="#1C1F18">12</td><td width="200px" height="100px" bgcolor="#BABEC7">13</td><td colspan="2" bgcolor="#D8D8D8">14</td></tr>
+        <tr><td rowspan="3" width="100px" bgcolor="#DFB850">15</td><td width="100px" height="100px" bgcolor="#161710">16</td><td width="100px" height="100px" bgcolor="#121E15">17</td><td width="200px" height="100px" bgcolor="#B9BDC7">18</td><td colspan="2" rowspan="2" width="250px" bgcolor="#21406E">19</td><td rowspan="3" width="50px" bgcolor="#B74534">20</td></tr>
+        <tr><td colspan="2" rowspan="2" bgcolor="#CBCBCB">21</td><td width="200px" height="50px" bgcolor="#0F160F">22</td></tr>
+        <tr><td colspan="3" width="450px" height="50px" bgcolor="#CBCBD0">23</td></tr>
+    </table>
+    -->
+</body>
+</html>

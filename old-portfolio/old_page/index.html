@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="BAPEHNKK's website" />
+    <meta property="og:url" content="https://bapehnkk.github.io/" />
+    <meta property="og:image" content="/css/img/logo.png" />
+    <meta name="description" content="bapehnkk">
+    <meta name="keywords" content="bapehnkk">
+    <meta name="author" content="bapehnkk">
+    <title>BAPEHNKK's website</title>
+    
+    <link rel="stylesheet" href="css/style.css">    
+    <link rel="stylesheet" href="css/menu.css">    
+    <link rel="shortcut icon" href="/css/img/favicon.ico" type="image/x-icon">
+
+
+
+  <script type="text/javascript">
+      var canvas = null;
+      var context = null;
+      var bufferCanvas = null;
+      var bufferCanvasCtx = null;
+      var flakeArray = [];
+      var flakeTimer = null;
+      var maxFlakes = 500; // Here you may set max flackes to be created 
+  
+      function init() {
+          //Canvas on Page
+          canvas = document.getElementById('canvasRain');
+          context = canvas.getContext("2d");
+          //Buffer Canvas
+          bufferCanvas = document.createElement("canvas");
+          bufferCanvasCtx = bufferCanvas.getContext("2d");
+          bufferCanvasCtx.canvas.width = context.canvas.width;
+          bufferCanvasCtx.canvas.height = context.canvas.height;
+  
+          
+          flakeTimer = setInterval(addFlake, 200);
+  
+          Draw();
+  
+          setInterval(animate, 30);
+           
+      }
+      function animate() {
+          
+          Update();
+          Draw();
+          
+      }
+      function addFlake() {
+  
+          flakeArray[flakeArray.length] = new Flake();
+          if (flakeArray.length == maxFlakes)
+              clearInterval(flakeTimer);
+      }
+      function blank() {
+          bufferCanvasCtx.fillStyle = "rgba(0,0,0,0.8)";
+          bufferCanvasCtx.fillRect(0, 0, bufferCanvasCtx.canvas.width, bufferCanvasCtx.canvas.height);
+          
+      }
+      function Update() {
+          for (var i = 0; i < flakeArray.length; i++) {
+              if (flakeArray[i].y < context.canvas.height) {
+                  flakeArray[i].y += flakeArray[i].speed;
+                  if (flakeArray[i].y > context.canvas.height)
+                      flakeArray[i].y = -5;
+                  flakeArray[i].x += flakeArray[i].drift;
+                  if (flakeArray[i].x > context.canvas.width)
+                      flakeArray[i].x = 0;
+              }
+          }
+          
+      }
+      function Flake() {
+          this.x = Math.round(Math.random() * context.canvas.width);
+          this.y = -10;
+          this.drift = Math.random();
+          this.speed =  7.21;
+
+          this.height = (Math.random() * 3) + 5;
+          
+          this.width = Math.random() *
+           0.15;
+      }
+      function Draw() {
+          context.save();
+          
+          blank();
+  
+          for (var i = 0; i < flakeArray.length; i++) {
+              bufferCanvasCtx.fillStyle = "white";
+              bufferCanvasCtx.fillRect(flakeArray[i].x, flakeArray[i].y, flakeArray[i].width, flakeArray[i].height);
+          }
+  
+          
+          context.drawImage(bufferCanvas, 0, 0, bufferCanvas.width, bufferCanvas.height);
+          context.restore();
+      }
+    
+  </script>
+
+</head>
+<body  onload="init()">
+    
+  <div class="header">
+  <header>
+    <nav class="dws-menu" align="right">
+
+      <ul>
+
+        <li><p>Задания</p>
+          <ul>
+            <li><a href="myworks/table/table.html">Table</a></li>
+            <li><a href="myworks/work_09.09.2020/index.html">09.09.2020</a></li>
+            <li><a href="myworks/work_14.09.2020/index.html">14.09.2020</a>
+              <ul><li><a href="myworks/work_14.09.2020/lukomorje.html">Лукоморье</a></li></ul>
+            </li>
+            <li><p>work_28.09.2020</p>
+                <ul>
+                  <li><a href="myworks/work_28.09.2020/chess/index.html">chess</a></li>
+                  <li><a href="myworks/work_28.09.2020/div/index.html">div</a></li>
+                  <li><a href="myworks/work_28.09.2020/loc/index.html">loc</a></li>
+                </ul>
+            </li>
+            <li><p>work_05.10.2020</p>
+              <ul>
+                <li><a href="myworks/work_05.10.2020/homework.html">Calculator</a></li>
+                <li><a href="myworks/work_05.10.2020/index.html">Credit calc.</a></li>
+                <li><a href="myworks/work_05.10.2020/work1.html">Работа</a></li>
+              </ul>
+            </li>
+            <li><p>work_12.10.2020</p>
+              <ul>
+                <li><a href="myworks/work_12.10.2020/risovalka1/risovalka.html">risovalka1</a></li>
+                <li><a href="myworks/work_12.10.2020/risovalka2/risovalka.html">risovalka2</a></li>
+                <li><a href="myworks/work_12.10.2020/risovalka2/orig.html">палитра</a></li>
+              </ul>
+            </li>
+            <li><p>work_19.10.2020</p>
+              <ul>
+                <li><a href="myworks/work_19.10.2020/work1/Bootstrap/index.html">Bootstrap</a></li>
+                <li><a href="myworks/work_19.10.2020/work2/fly.html">муха</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="myworks/arduino_modules_homework/index.html">Arduino</a>
+            </li>
+            <li>
+              <a href="myworks/work_02.11.2020/index.html">02.11.2020</a>
+            </li>
+            <li>
+              <a href="myworks/work_25.02.2021/index.html">25.02.2021</a>
+            </li>
+            <li>
+              <a href="myworks/work_03.03.2021/index.html">03.03.2021</a>
+            </li>
+            <li>
+              <a href="myworks/arduino3D_5611AH/">arduino3D_5611AH</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <p>Музычка</p>
+          <ul>
+            <li>
+              <audio controls title="Проклятый старый дом">
+                <source src="sounds/kish.mp3"/>
+                <p>Ваш браузер не поддерживает аудио</p>
+                </audio>
+            </li>
+            <li>
+              <audio title="Звуки дождя" controls>
+                <source src="sounds/groza-i-prolivnoy-dojd.mp3" type="audio/mpeg" />
+                <p>Ваш браузер не поддерживает аудио</p>
+                </audio>
+            </li>
+          </ul>
+        </li>
+
+        <li><a href="https://yummyanime.com/">yummyanime</a></li>
+
+        <li>
+          <p>Справочные материалы</p>
+          <ul>
+            <li><p>Сайты</p>
+              <ul>
+                <li><a target="_blank" href="http://scrumpoker.eu/oppeained/veebirakenduste-alused/">scrumpoker.eu</a></li>
+                <li><a target="_blank" href="https://fontawesome.com/icons?d=gallery">fontawesome.com</a></li>
+                <li><a target="_blank" href="https://webref.ru/">webref.ru</a></li>
+                <li><a target="_blank" href="http://htmlbook.ru/">htmlbook.ru</a></li>
+                <li><a target="_blank" href="https://metanit.com/">metanit.com</a></li>
+                <li><a target="_blank" href="https://howdyho.net/">howdyho.net</a></li>
+                <li><a target="_blank" href="https://html5css.ru/">html5css.ru</a></li>
+                <li><a target="_blank" href="https://fonts.google.com/">fonts.google.com</a></li>
+                <li><a target="_blank" href="https://codepen.io/arickle/pen/XKjMZY">анимация дождя</a></li>
+                <li><a href="https://bootstrap-4.ru/" target="_blank">bootstrap</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+
+    </nav>
+
+ </header>
+
+  <img class="logo" src="css/img/logo.png" alt="" align="right" >
+
+  </div>
+    
+  <canvas  id="canvasRain">Canvas Not Supported</canvas>
+
+</body>
+</html>

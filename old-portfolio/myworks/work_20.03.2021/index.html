@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Умный дом</title>
+    <link rel="shortcut icon" href="styles/images/logo/favicon.ico" type="image/x-icon" />
+    <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <img src="styles\images\logo\favicon.ico" alt="">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Модули<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="md1.html">Модуль уборки</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="md2.html">Игровая комната</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="md3.html">Умная прачечная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="">Бета</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Модуль 1</th>
+                        <th scope="col">Модуль 2</th>
+                        <th scope="col">Модуль 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td>Модуль уборки</td>
+                        <td>Игровая комната</td>
+                        <td>Умная прачечная</td>
+                    </tr>
+                    <tr>
+                        <th>Абстрактные<br>картинки</th>
+                        <td><img class="rounded float-left " src="styles\images\modules\md1.jpeg" alt=""></td>
+                        <td><img class="rounded float-left " src="styles\images\modules\md2.jpg" alt=""></td>
+                        <td><img class="rounded float-left " src="styles\images\modules\md3.jpg" alt=""></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--
+        jquery -> popper -> bootstrap
+    -->
+    <script language="javascript" src="bootstrap/jquery-3.5.1.slim.min.js"></script>
+    <script language="javascript" src="bootstrap/popper.min.js"></script>
+    <script language="javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script language="javascript" src="scripts/jscript.js"></script>
+</body>
+
+</html>
