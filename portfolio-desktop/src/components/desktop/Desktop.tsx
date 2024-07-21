@@ -36,14 +36,20 @@ interface WindowData {
     content: React.ReactNode;
 }
 
+interface PinnedWindowData {
+    title: string;
+    icon: React.ReactNode;
+}
+
 const Desktop: React.FC = () => {
     const [isStartMenuVisible, setStartMenuVisible] = useState(false);
     const [icons, setIcons] = useState<IconData[]>([
-        { id: 1, name: 'My Projects', x: 0, y: 0, image: projectIcon },
+        { id: 1, name: 'Projects', x: 0, y: 0, image: projectIcon },
         { id: 2, name: 'About Me', x: 100, y: 0, image: aboutIcon },
         { id: 3, name: 'Contact', x: 200, y: 0, image: contactIcon },
     ]);
     const [windows, setWindows] = useState<WindowData[]>([]);
+    const [pinnedWindows, setPinnedWindows] = useState<PinnedWindowData[]>([]);
     const [sleepMode, setSleepMode] = useState(true);
     const [isLoginScreenVisible, setIsLoginScreenVisible] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,8 +59,8 @@ const Desktop: React.FC = () => {
     const startMenuRef = useRef<HTMLDivElement>(null);
     const startButtonRef = useRef<HTMLDivElement>(null);
 
-    const GRID_SIZE = 100; // Размер сетки
-    const TASKBAR_HEIGHT = 5 * 16; // Высота taskbar в пикселях (5rem)
+    const GRID_SIZE = 100;
+    const TASKBAR_HEIGHT = 5 * 16; // Taskbar height in pixels (5rem)
 
     const toggleStartMenu = () => {
         setStartMenuVisible(!isStartMenuVisible);
@@ -65,7 +71,7 @@ const Desktop: React.FC = () => {
         let content: React.ReactNode;
 
         switch (title) {
-            case 'My Projects':
+            case 'Projects':
                 icon = <FaFolder />;
                 content = <ProjectsWindow />;
                 break;
@@ -195,6 +201,14 @@ const Desktop: React.FC = () => {
         }
     };
 
+    const togglePin = (title: string, icon: React.ReactNode) => {
+        setPinnedWindows((prev) =>
+            prev.some(pinned => pinned.title === title)
+                ? prev.filter(pinned => pinned.title !== title)
+                : [...prev, { title, icon }]
+        );
+    };
+
     useEffect(() => {
         if (sleepMode) {
             setStartMenuVisible(false);
@@ -218,6 +232,10 @@ const Desktop: React.FC = () => {
         return (<LoginScreen onLogin={() => { setIsLoggedIn(true); setIsLoginScreenVisible(false); }} />);
     }
 
+    const closeAllWindows = (title: string) => {
+        setWindows(windows.filter(window => window.title !== title));
+    };
+
     return (
         <div className={styles.desktop}>
             <BackgroundScene />
@@ -227,8 +245,11 @@ const Desktop: React.FC = () => {
             <Taskbar
                 onClickStartButton={toggleStartMenu}
                 windows={windows}
+                pinnedWindows={pinnedWindows}
                 onWindowClick={toggleWindow}
-                onWindowClose={closeWindow} // Pass the closeWindow function
+                onWindowClose={closeWindow}
+                onWindowCloseAll={closeAllWindows}
+                onPinToggle={togglePin}
                 isStartMenuOpen={isStartMenuVisible}
                 startButtonRef={startButtonRef}
                 onOpenApplication={openWindow}

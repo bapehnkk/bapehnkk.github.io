@@ -9,6 +9,7 @@
   @apply flex items-center cursor-pointer relative w-10 h-10 p-2 rounded;
   box-sizing: border-box;
   transition: .3s all ease;
+
   &:hover {
     @apply bg-gray-600;
   }
@@ -40,14 +41,18 @@
 }
 
 .taskbarIcon {
-  @apply mr-2 p-2 flex items-center  rounded cursor-pointer transition-colors duration-300 justify-start h-10 relative;
+  @apply mr-2 p-2 flex items-center  rounded-md cursor-pointer transition-colors duration-300 justify-start h-10 relative bg-opacity-50;
   box-sizing: border-box;
   transition: .3s all ease;
 
 
+  &::before,
   &::after {
     content: "";
     position: absolute;
+  }
+
+  &::after {
     width: 0;
     border-radius: 1rem;
     height: 3px;
@@ -58,29 +63,63 @@
     @apply bg-white;
   }
 
+  &.grouped {
+    position: relative;
+    z-index: 1;
+
+
+    &::before {
+      width: calc(100% - 6px);
+      height: 100%;
+      border-radius: inherit;
+      background-color: inherit;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  }
+
+
+  .windowIcon {
+    @apply p-2 text-[1.3rem];
+    transition: .2s all ease;
+  }
+
+  &.activeWindow {
+    @apply bg-gray-700 ;
+
+    &::before {
+      box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    &::after {
+      width: 40%;
+    }
+  }
+
   &:hover {
-    @apply bg-gray-600;
+    @apply bg-gray-600 bg-opacity-50;
+
+    &.grouped {
+      @apply bg-gray-600;
+
+      &::before {
+        box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
+      }
+    }
 
     &::after {
       width: 60%;
+    }
+  }
 
+  &:active {
+    .windowIcon {
+      @apply scale-[.80];
     }
   }
 }
 
-.activeWindow {
-  @apply bg-gray-700 ;
-
-  &::after {
-    width: 40%;
-  }
-
-
-}
-
-.windowIcon {
-  @apply mr-2;
-}
 
 .taskbarRight {
   @apply flex items-center ml-auto;
@@ -99,7 +138,6 @@
 }
 
 
-
 .notifications {
   @apply fixed bottom-[4.5rem] right-4 bg-gray-800 text-white p-4 rounded-lg shadow-lg;
   width: 250px;
@@ -107,21 +145,42 @@
 
 .notification {
   @apply flex items-center mb-2 p-2 bg-gray-700 rounded;
-}
 
-.notificationIcon {
-  @apply w-10 h-10 mr-4 cursor-pointer p-3 rounded;
-  transition: .3s all ease;
+  .notificationIcon {
+    @apply w-10 h-10 mr-4 cursor-pointer p-3 rounded;
+    transition: .3s all ease;
 
-  &:hover {
-    @apply bg-gray-600;
+    &:hover {
+      @apply bg-gray-600;
+    }
+  }
+
+  strong {
+    @apply block text-sm;
+  }
+
+  p {
+    @apply text-xs;
   }
 }
 
-.notification strong {
-  @apply block text-sm;
+
+.contextMenu {
+  @apply absolute bg-gray-800 text-white rounded shadow-lg z-50 py-1 mx-1 min-w-[12rem];
+  z-index: 100;
+
+  .contextMenuItem {
+    @apply px-2  mx-2 py-1 my-1 cursor-pointer hover:bg-gray-600 active:bg-gray-700 flex flex-row items-center gap-2 rounded-sm;
+  }
+
+  .contextMenuDivide {
+    @apply border-t border-gray-300 my-2;
+  }
+
+  .contextMenuIcon {
+    @apply mr-2;
+  }
+
 }
 
-.notification p {
-  @apply text-xs;
-}
+

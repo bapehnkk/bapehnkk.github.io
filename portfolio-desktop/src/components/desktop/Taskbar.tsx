@@ -1,42 +1,65 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FaBell, FaExclamationTriangle, FaWindows } from 'react-icons/fa';
+import { FaBell, FaExclamationTriangle, FaThumbtack, FaTimes, FaWindows } from 'react-icons/fa';
 import styles from './Taskbar.module.scss';
 import windowsIcon from '@/assets/images/windows-icon.png';
 import StartMenu from './StartMenu';
 import Weather from './Weather';
 import ClockCalendar from './ClockCalendar';
 
+interface Window {
+    id: number;
+    title: string;
+    icon: React.ReactNode;
+    isMinimized: boolean;
+    zIndex: number;
+}
+
+interface ContextMenu {
+    id: number;
+    x: number;
+    y: number;
+}
+
 interface TaskbarProps {
     onClickStartButton: () => void;
-    windows: { id: number, title: string, icon: React.ReactNode, isMinimized: boolean, zIndex: number }[];
     onWindowClick: (id: number) => void;
     onWindowClose: (id: number) => void;
+    onWindowCloseAll: (title: string) => void;
+    onPinToggle: (title: string, icon: React.ReactNode) => void;
     isStartMenuOpen: boolean;
     startButtonRef: React.RefObject<HTMLDivElement>;
     onOpenApplication: (appName: string) => void;
+    windows: Window[];
+    pinnedWindows: { title: string, icon: React.ReactNode }[];
 }
 
 const Taskbar: React.FC<TaskbarProps> = ({
                                              onClickStartButton,
                                              windows = [],
+                                             pinnedWindows = [],
                                              onWindowClick,
                                              onWindowClose,
                                              isStartMenuOpen,
                                              startButtonRef,
                                              onOpenApplication,
+                                             onWindowCloseAll,
+                                             onPinToggle
                                          }) => {
     const [time, setTime] = useState(new Date());
     const [isClockCalendarOpen, setIsClockCalendarOpen] = useState(false);
     const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+    const [contextMenu, setContextMenu] = useState<ContextMenu | null>(null);
     const clockCalendarRef = useRef<HTMLDivElement>(null);
     const clockButtonRef = useRef<HTMLDivElement>(null);
     const notificationsRef = useRef<HTMLDivElement>(null);
+    const contextMenuRef = useRef<HTMLDivElement>(null);
     const windowsContainerRef = useRef<HTMLDivElement>(null);
 
     const isDragging = useRef(false);
     const startX = useRef(0);
     const scrollLeft = useRef(0);
+    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
     useEffect(() => {
         const timer = setInterval(() => setTime(new Date()), 60000);
@@ -71,13 +94,29 @@ const Taskbar: React.FC<TaskbarProps> = ({
         ) {
             setIsNotificationsOpen(false);
         }
+        if (
+            contextMenuRef.current &&
+            !contextMenuRef.current.contains(event.target as Node) &&
+            windowsContainerRef.current &&
+            !windowsContainerRef.current.contains(event.target as Node)
+        ) {
+            setContextMenu(null);
+        }
     };
 
-    const handleWindowMouseDown = (event: React.MouseEvent, id: number) => {
-        if (event.button === 1) { // Middle mouse button
-            onWindowClose(id);
+    const handleWindowMouseDown = (event: React.MouseEvent<HTMLDivElement>, id: number, title: string) => {
+        const windowExists = windows.some(win => win.id === id);
+        if (windowExists) {
+            if (event.button === 1) { // Middle mouse button
+                onWindowClose(id);
+            } else if (event.button === 2) { // Right mouse button
+                event.preventDefault();
+                setContextMenu({ id, x: event.clientX, y: event.clientY });
+            } else {
+                onWindowClick(id);
+            }
         } else {
-            onWindowClick(id);
+            onOpenApplication(title);
         }
     };
 
@@ -111,13 +150,65 @@ const Taskbar: React.FC<TaskbarProps> = ({
         };
     }, []);
 
-    const highestZIndex = Math.max(...windows.map(window => window.zIndex));
+    useEffect(() => {
+        if (contextMenu && contextMenuRef.current) {
+            const menuHeight = contextMenuRef.current.clientHeight;
+            const menuWidth = contextMenuRef.current.clientWidth;
+            const windowIcon = document.getElementById(`window-icon-${contextMenu.id}`);
+            if (windowIcon) {
+                const rect = windowIcon.getBoundingClientRect();
+                const offset = 15; // Offset
+                let left = rect.left + rect.width / 2 - menuWidth / 2;
+                const top = rect.top - menuHeight - offset;
+
+                // Ensure the menu does not overflow the screen horizontally
+                if (left + menuWidth > window.innerWidth) {
+                    left = window.innerWidth - menuWidth;
+                } else if (left < 0) {
+                    left = 0;
+                }
+
+                setMenuPosition({
+                    top,
+                    left,
+                });
+            }
+        }
+    }, [contextMenu]);
+
+    const groupedWindows = windows.reduce((acc: { [key: string]: Window[] }, window) => {
+        if (!acc[window.title]) {
+            acc[window.title] = [];
+        }
+        acc[window.title].push(window);
+        return acc;
+    }, {});
+
+    const handleCloseAllWindows = (title: string) => {
+        onWindowCloseAll(title);
+        setContextMenu(null);
+    };
+
+    const handleToggleWindowMinimize = (id: number) => {
+        onWindowClick(id);
+        setContextMenu(null);
+    };
+
+    const getGroupTitleById = (id: number): string => {
+        const window = windows.find(window => window.id === id);
+        return window ? window.title : '';
+    };
+
+    const currentGroupTitle = getGroupTitleById(contextMenu?.id || 0);
+    const currentGroupIcon = windows.find(window => window.title === currentGroupTitle)?.icon;
+    const isGroupMultiple = groupedWindows[currentGroupTitle]?.length > 1;
+    const isPinned = pinnedWindows.some(pinned => pinned.title === currentGroupTitle);
 
     return (
         <>
             <div className={styles.taskbar}>
                 <div className={styles.startButton} onClick={handleStartButtonClick} ref={startButtonRef}>
-                    <img src={windowsIcon} alt="Start" className={styles.windowsIcon} />
+                    <img src={windowsIcon} alt="Start" className={styles.windowsIcon}/>
                 </div>
                 <div
                     className={styles.windowsContainer}
@@ -125,23 +216,35 @@ const Taskbar: React.FC<TaskbarProps> = ({
                     onMouseDown={handleDragStart}
                 >
                     <div className={styles.windows}>
-                        {windows.map((window) => (
+                        {Object.entries(groupedWindows).map(([, group]) => (
                             <div
-                                key={window.id}
-                                className={`${styles.taskbarIcon} ${window.zIndex === highestZIndex ? styles.activeWindow : ''}`}
-                                onMouseDown={(event) => handleWindowMouseDown(event, window.id)}
+                                key={group[0].id}
+                                id={`window-icon-${group[0].id}`}
+                                className={`${styles.taskbarIcon} ${group.length > 1 ? styles.grouped : ''} ${group.some(win => win.zIndex === Math.max(...windows.map(win => win.zIndex))) ? styles.activeWindow : ''}`}
+                                onMouseDown={(event) => handleWindowMouseDown(event, group[0].id, group[0].title)}
+                                onContextMenu={(event) => event.preventDefault()}
                             >
-                                <div className={styles.windowIcon}>{window.icon}</div>
-                                {window.title}
+                                <div className={styles.windowIcon}>{group[0].icon}</div>
+                            </div>
+                        ))}
+                        {pinnedWindows.filter(pinned => !groupedWindows[pinned.title]).map((pinned) => (
+                            <div
+                                key={`pinned-${pinned.title}`}
+                                id={`window-icon-pinned-${pinned.title}`}
+                                className={`${styles.taskbarIcon}`}
+                                onMouseDown={(event) => handleWindowMouseDown(event, 0, pinned.title)}
+                                onContextMenu={(event) => event.preventDefault()}
+                            >
+                                <div className={styles.windowIcon}>{pinned.icon}</div>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className={styles.taskbarRight}>
-                    <Weather />
-                    <FaBell className={styles.notificationIcon} onClick={handleBellClick} />
+                    <Weather/>
+                    <FaBell className={styles.notificationIcon} onClick={handleBellClick}/>
                     <div className={styles.clock} onClick={handleClockClick} ref={clockButtonRef}>
-                        {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
                     </div>
                 </div>
             </div>
@@ -149,12 +252,12 @@ const Taskbar: React.FC<TaskbarProps> = ({
                 {isStartMenuOpen && (
                     <>
                         <div className={styles.overlay} onClick={handleStartButtonClick}></div>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
                             <StartMenu
                                 onRestart={() => console.log('Restart')}
                                 onSleep={() => console.log('Sleep')}
                                 onShutDown={() => console.log('Shut Down')}
-                                onOpenApplication={onOpenApplication}  // Add this line
+                                onOpenApplication={onOpenApplication}
                             />
                         </motion.div>
                     </>
@@ -163,39 +266,101 @@ const Taskbar: React.FC<TaskbarProps> = ({
             <AnimatePresence>
                 {isClockCalendarOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{opacity: 0, y: 10}}
+                        animate={{opacity: 1, y: 0}}
+                        exit={{opacity: 0, y: 10}}
+                        transition={{duration: 0.3}}
                     >
-                        <ClockCalendar calendarRef={clockCalendarRef} />
+                        <ClockCalendar calendarRef={clockCalendarRef}/>
                     </motion.div>
                 )}
             </AnimatePresence>
             <AnimatePresence>
                 {isNotificationsOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{opacity: 0, y: -10}}
+                        animate={{opacity: 1, y: 0}}
+                        exit={{opacity: 0, y: -10}}
+                        transition={{duration: 0.3}}
                         className={styles.notifications}
                         ref={notificationsRef}
                     >
                         <div className={styles.notification}>
-                            <FaWindows className={styles.notificationIcon} />
+                            <FaWindows className={styles.notificationIcon}/>
                             <div>
                                 <strong>System Notification</strong>
                                 <p>Update your Windows...</p>
                             </div>
                         </div>
                         <div className={styles.notification}>
-                            <FaExclamationTriangle className={styles.notificationIcon} />
+                            <FaExclamationTriangle className={styles.notificationIcon}/>
                             <div>
                                 <strong>Warning</strong>
                                 <p>You've been hacked, pay to this account...</p>
                             </div>
                         </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            <AnimatePresence>
+                {contextMenu && (
+                    <motion.div
+                        className={styles.contextMenu}
+                        initial={{opacity: 0, scale: 0.8}}
+                        animate={{opacity: 1, scale: 1}}
+                        exit={{opacity: 0, scale: 0.8}}
+                        transition={{duration: 0.2}}
+                        style={{top: menuPosition.top, left: menuPosition.left}}
+                        ref={contextMenuRef}
+                    >
+                        {groupedWindows[currentGroupTitle]?.map((win) => (
+                            <div
+                                key={win.id}
+                                className={styles.contextMenuItem}
+                                onClick={() => handleToggleWindowMinimize(win.id)}
+                            >
+                                <span className={styles.contextMenuIcon}>{win.icon}</span>
+                                {win.title}
+                            </div>
+                        ))}
+                        <div className={styles.contextMenuDivide}></div>
+                        <div className={styles.contextMenuItem} onClick={() => {
+                            setContextMenu(null);
+                            onOpenApplication(currentGroupTitle);
+                        }}>
+                            {currentGroupIcon && <span className={styles.contextMenuIcon}>{currentGroupIcon}</span>}
+                            <strong>{currentGroupTitle}</strong>
+                        </div>
+                        <div
+                            className={styles.contextMenuItem}
+                            onClick={() => {
+                                onPinToggle(currentGroupTitle, currentGroupIcon);
+                                setContextMenu(null);
+                            }}
+                        >
+                            <FaThumbtack className={styles.contextMenuIcon}/>
+                            {isPinned ? 'Unpin from taskbar' : 'Pin to taskbar'}
+                        </div>
+                        {isGroupMultiple ? (
+                            <div
+                                className={styles.contextMenuItem}
+                                onClick={() => handleCloseAllWindows(currentGroupTitle)}
+                            >
+                                <FaTimes className={styles.contextMenuIcon}/>
+                                Close all tabs
+                            </div>
+                        ) : (
+                            <div
+                                className={styles.contextMenuItem}
+                                onClick={() => {
+                                    onWindowClose(contextMenu.id);
+                                    setContextMenu(null);
+                                }}
+                            >
+                                <FaTimes className={styles.contextMenuIcon}/>
+                                Close window
+                            </div>
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>

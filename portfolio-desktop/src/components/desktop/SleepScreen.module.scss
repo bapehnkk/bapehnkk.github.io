@@ -8,6 +8,10 @@
   @apply w-full h-full bg-cover bg-center relative;
 }
 
+.arrowWrapper {
+  @apply absolute bottom-4 left-1/2 transform -translate-x-1/2;
+}
+
 .arrow {
-  @apply absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-4xl cursor-pointer;
+  @apply text-white text-4xl cursor-pointer;
 }
