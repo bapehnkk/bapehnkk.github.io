@@ -51,9 +51,8 @@
     content: "";
     position: absolute;
   }
-
   &::after {
-    width: 0;
+    width: 20%;
     border-radius: 1rem;
     height: 3px;
     bottom: 1px;
@@ -93,7 +92,7 @@
     }
 
     &::after {
-      width: 40%;
+      width: 50%;
     }
   }
 
@@ -108,9 +107,6 @@
       }
     }
 
-    &::after {
-      width: 60%;
-    }
   }
 
   &:active {
@@ -118,8 +114,15 @@
       @apply scale-[.80];
     }
   }
+
+
 }
 
+.taskbarIconPinned {
+  &::after {
+    width: 0 !important;
+  }
+}
 
 .taskbarRight {
   @apply flex items-center ml-auto;
@@ -182,5 +185,3 @@
   }
 
 }
-
-

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { FaBell, FaExclamationTriangle, FaThumbtack, FaTimes, FaWindows } from 'react-icons/fa';
+import React, {useState, useEffect, useRef} from 'react';
+import {AnimatePresence, motion} from 'framer-motion';
+import {FaBell, FaExclamationTriangle, FaThumbtack, FaTimes, FaWindows} from 'react-icons/fa';
 import styles from './Taskbar.module.scss';
 import windowsIcon from '@/assets/images/windows-icon.png';
 import StartMenu from './StartMenu';
@@ -50,6 +50,8 @@ const Taskbar: React.FC<TaskbarProps> = ({
     const [isClockCalendarOpen, setIsClockCalendarOpen] = useState(false);
     const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
     const [contextMenu, setContextMenu] = useState<ContextMenu | null>(null);
+    const [, setVisiblePinned] = useState<{ title: string, icon: React.ReactNode }[]>(pinnedWindows);
+
     const clockCalendarRef = useRef<HTMLDivElement>(null);
     const clockButtonRef = useRef<HTMLDivElement>(null);
     const notificationsRef = useRef<HTMLDivElement>(null);
@@ -58,13 +60,18 @@ const Taskbar: React.FC<TaskbarProps> = ({
 
     const isDragging = useRef(false);
     const startX = useRef(0);
+    const startY = useRef(0);
     const scrollLeft = useRef(0);
-    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+    const [menuPosition, setMenuPosition] = useState({top: 0, left: 0});
 
     useEffect(() => {
         const timer = setInterval(() => setTime(new Date()), 60000);
         return () => clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+        setVisiblePinned(pinnedWindows.filter(pinned => !windows.some(win => win.title === pinned.title)));
+    }, [pinnedWindows, windows]);
 
     const handleStartButtonClick = () => {
         onClickStartButton();
@@ -104,16 +111,66 @@ const Taskbar: React.FC<TaskbarProps> = ({
         }
     };
 
-    const handleWindowMouseDown = (event: React.MouseEvent<HTMLDivElement>, id: number, title: string) => {
+    const handleWindowMouseDown = (
+        event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+        id: number,
+        title: string
+    ) => {
         const windowExists = windows.some(win => win.id === id);
-        if (windowExists) {
-            if (event.button === 1) { // Middle mouse button
-                onWindowClose(id);
-            } else if (event.button === 2) { // Right mouse button
-                event.preventDefault();
-                setContextMenu({ id, x: event.clientX, y: event.clientY });
+
+        const handleTouchEnd = (touchEvent: TouchEvent) => {
+            touchEvent.preventDefault();
+            const touch = touchEvent.changedTouches[0];
+            const endX = touch.clientX;
+            const endY = touch.clientY;
+            const contextMenuOpen = Math.abs(startX.current - endX) < 10 && Math.abs(startY.current - endY) < 10;
+
+            if (windowExists) {
+                if (contextMenuOpen) {
+                    setContextMenu({id, x: endX, y: endY});
+                } else {
+                    onWindowClick(id);
+                }
             } else {
-                onWindowClick(id);
+                onOpenApplication(title);
+            }
+
+            document.removeEventListener('touchend', handleTouchEnd);
+            document.removeEventListener('touchmove', handleTouchMove);
+        };
+
+        const handleTouchMove = (touchMoveEvent: TouchEvent) => {
+            touchMoveEvent.preventDefault();
+            const touch = touchMoveEvent.touches[0];
+            const moveX = touch.clientX;
+            const moveY = touch.clientY;
+
+            if (Math.abs(startX.current - moveX) > 10 || Math.abs(startY.current - moveY) > 10) {
+                isDragging.current = true;
+            }
+        };
+
+        if (windowExists) {
+            if (event.type === 'mousedown') {
+                if ((event as React.MouseEvent).button === 1) {
+                    onWindowClose(id);
+                } else if ((event as React.MouseEvent).button === 2) {
+                    event.preventDefault();
+                    setContextMenu({
+                        id,
+                        x: (event as React.MouseEvent).clientX,
+                        y: (event as React.MouseEvent).clientY
+                    });
+                } else {
+                    onWindowClick(id);
+                }
+            } else if (event.type === 'touchstart') {
+                startX.current = (event as React.TouchEvent).touches[0].clientX;
+                startY.current = (event as React.TouchEvent).touches[0].clientY;
+                isDragging.current = false;
+
+                document.addEventListener('touchend', handleTouchEnd);
+                document.addEventListener('touchmove', handleTouchMove);
             }
         } else {
             onOpenApplication(title);
@@ -216,26 +273,48 @@ const Taskbar: React.FC<TaskbarProps> = ({
                     onMouseDown={handleDragStart}
                 >
                     <div className={styles.windows}>
-                        {Object.entries(groupedWindows).map(([, group]) => (
+                        {/* Render pinned and grouped windows with pinned titles first */}
+                        {pinnedWindows.map((pinned) => {
+                            const group = groupedWindows[pinned.title];
+                            if (group) {
+                                return (
+                                    <div
+                                        key={group[0].id}
+                                        id={`window-icon-${group[0].id}`}
+                                        className={`${styles.taskbarIcon} ${group.length > 1 ? styles.grouped : ''} ${group.some(win => win.zIndex === Math.max(...windows.map(win => win.zIndex))) ? styles.activeWindow : ''}`}
+                                        onMouseDown={(event) => handleWindowMouseDown(event, group[0].id, group[0].title)}
+                                        onTouchStart={(event) => handleWindowMouseDown(event, group[0].id, group[0].title)}
+                                        onContextMenu={(event) => event.preventDefault()}
+                                    >
+                                        <div className={styles.windowIcon}>{group[0].icon}</div>
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div
+                                        key={`pinned-${pinned.title}`}
+                                        id={`window-icon-pinned-${pinned.title}`}
+                                        className={`${styles.taskbarIcon} ${styles.taskbarIconPinned}`}
+                                        onMouseDown={(event) => handleWindowMouseDown(event, 0, pinned.title)}
+                                        onTouchStart={(event) => handleWindowMouseDown(event, 0, pinned.title)}
+                                        onContextMenu={(event) => event.preventDefault()}
+                                    >
+                                        <div className={styles.windowIcon}>{pinned.icon}</div>
+                                    </div>
+                                );
+                            }
+                        })}
+                        {/* Render grouped windows without pinned titles next */}
+                        {Object.entries(groupedWindows).filter(([title]) => !pinnedWindows.some(pinned => pinned.title === title)).map(([, group]) => (
                             <div
                                 key={group[0].id}
                                 id={`window-icon-${group[0].id}`}
                                 className={`${styles.taskbarIcon} ${group.length > 1 ? styles.grouped : ''} ${group.some(win => win.zIndex === Math.max(...windows.map(win => win.zIndex))) ? styles.activeWindow : ''}`}
                                 onMouseDown={(event) => handleWindowMouseDown(event, group[0].id, group[0].title)}
+                                onTouchStart={(event) => handleWindowMouseDown(event, group[0].id, group[0].title)}
                                 onContextMenu={(event) => event.preventDefault()}
                             >
                                 <div className={styles.windowIcon}>{group[0].icon}</div>
-                            </div>
-                        ))}
-                        {pinnedWindows.filter(pinned => !groupedWindows[pinned.title]).map((pinned) => (
-                            <div
-                                key={`pinned-${pinned.title}`}
-                                id={`window-icon-pinned-${pinned.title}`}
-                                className={`${styles.taskbarIcon}`}
-                                onMouseDown={(event) => handleWindowMouseDown(event, 0, pinned.title)}
-                                onContextMenu={(event) => event.preventDefault()}
-                            >
-                                <div className={styles.windowIcon}>{pinned.icon}</div>
                             </div>
                         ))}
                     </div>

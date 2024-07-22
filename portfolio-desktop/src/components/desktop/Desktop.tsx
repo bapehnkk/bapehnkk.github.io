@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Icon from '@/components/desktop/Icon';
 import Taskbar from '@/components/desktop/Taskbar';
 import StartMenu from '@/components/desktop/StartMenu';
 import Window from '@/components/window/Window';
-import BackgroundScene from '@/components/BackgroundScene/BackgroundScene.tsx';
+import BackgroundScene from '@/components/BackgroundScene/BackgroundScene';
 import SleepScreen from '@/components/desktop/SleepScreen.tsx';
 import LoginScreen from '@/components/desktop/LoginScreen';
 import ProjectsWindow from '@/components/window/ProjectsWindow';
@@ -13,7 +13,7 @@ import styles from './Desktop.module.scss';
 import projectIcon from '@/assets/images/project-icon.png';
 import contactIcon from '@/assets/images/contact-icon.png';
 import aboutIcon from '@/assets/images/about-icon.png';
-import { FaFolder, FaEnvelope, FaUser } from 'react-icons/fa';
+import {FaFolder, FaEnvelope, FaUser} from 'react-icons/fa';
 
 interface IconData {
     id: number;
@@ -44,9 +44,9 @@ interface PinnedWindowData {
 const Desktop: React.FC = () => {
     const [isStartMenuVisible, setStartMenuVisible] = useState(false);
     const [icons, setIcons] = useState<IconData[]>([
-        { id: 1, name: 'Projects', x: 0, y: 0, image: projectIcon },
-        { id: 2, name: 'About Me', x: 100, y: 0, image: aboutIcon },
-        { id: 3, name: 'Contact', x: 200, y: 0, image: contactIcon },
+        {id: 1, name: 'Projects', x: 0, y: 0, image: projectIcon},
+        {id: 2, name: 'About Me', x: 100, y: 0, image: aboutIcon},
+        {id: 3, name: 'Contact', x: 200, y: 0, image: contactIcon},
     ]);
     const [windows, setWindows] = useState<WindowData[]>([]);
     const [pinnedWindows, setPinnedWindows] = useState<PinnedWindowData[]>([]);
@@ -72,19 +72,19 @@ const Desktop: React.FC = () => {
 
         switch (title) {
             case 'Projects':
-                icon = <FaFolder />;
-                content = <ProjectsWindow />;
+                icon = <FaFolder/>;
+                content = <ProjectsWindow/>;
                 break;
             case 'About Me':
-                icon = <FaUser />;
-                content = <AboutWindow />;
+                icon = <FaUser/>;
+                content = <AboutWindow/>;
                 break;
             case 'Contact':
-                icon = <FaEnvelope />;
-                content = <ContactWindow />;
+                icon = <FaEnvelope/>;
+                content = <ContactWindow/>;
                 break;
             default:
-                icon = <FaFolder />;
+                icon = <FaFolder/>;
                 content = null;
         }
 
@@ -95,14 +95,14 @@ const Desktop: React.FC = () => {
             zIndex: nextZIndex,
             isActive: true,
             isMinimized: false,
-            position: { x: 100, y: 100 },
-            size: { width: 320, height: 200 },
+            position: {x: 100, y: 100},
+            size: {width: 320, height: 200},
             isMaximized: false,
             content
         };
         setNextWindowId(nextWindowId + 1); // Increment to ensure unique ID
         setNextZIndex(nextZIndex + 1);
-        setWindows(windows.map(w => ({ ...w, isActive: false })).concat(newWindow));
+        setWindows(windows.map(w => ({...w, isActive: false})).concat(newWindow));
     };
 
     const closeWindow = (id: number) => {
@@ -111,7 +111,7 @@ const Desktop: React.FC = () => {
 
     const minimizeWindow = (id: number) => {
         setWindows(windows.map(window =>
-            window.id === id ? { ...window, isMinimized: true, isActive: false } : window
+            window.id === id ? {...window, isMinimized: true, isActive: false} : window
         ));
     };
 
@@ -119,9 +119,9 @@ const Desktop: React.FC = () => {
         setWindows(windows.map(window => {
             if (window.id === id) {
                 if (window.isMinimized || window.zIndex < nextZIndex - 1) {
-                    return { ...window, isMinimized: false, isActive: true, zIndex: nextZIndex };
+                    return {...window, isMinimized: false, isActive: true, zIndex: nextZIndex};
                 } else {
-                    return { ...window, isMinimized: true, isActive: false };
+                    return {...window, isMinimized: true, isActive: false};
                 }
             }
             return window;
@@ -131,32 +131,38 @@ const Desktop: React.FC = () => {
 
     const bringToFront = (id: number) => {
         setWindows(windows.map(window =>
-            window.id === id ? { ...window, zIndex: nextZIndex, isActive: true, isMinimized: false } : { ...window, isActive: false }
+            window.id === id ? {...window, zIndex: nextZIndex, isActive: true, isMinimized: false} : {
+                ...window,
+                isActive: false
+            }
         ));
         setNextZIndex(nextZIndex + 1);
     };
 
-    const updateWindowState = (id: number, position: { x: number, y: number }, size: { width: number, height: number }, isMaximized: boolean) => {
+    const updateWindowState = (id: number, position: { x: number, y: number }, size: {
+        width: number,
+        height: number
+    }, isMaximized: boolean) => {
         setWindows(windows.map(window =>
-            window.id === id ? { ...window, position, size, isMaximized } : window
+            window.id === id ? {...window, position, size, isMaximized} : window
         ));
     };
 
     const snapToGrid = (x: number, y: number) => {
         const snappedX = Math.round(x / GRID_SIZE) * GRID_SIZE;
         const snappedY = Math.round(y / GRID_SIZE) * GRID_SIZE;
-        return { x: snappedX, y: snappedY };
+        return {x: snappedX, y: snappedY};
     };
 
     const moveIcon = (id: number, x: number, y: number) => {
-        const { x: snappedX, y: snappedY } = snapToGrid(x, y);
+        const {x: snappedX, y: snappedY} = snapToGrid(x, y);
         const clampedX = Math.max(0, Math.min(snappedX, window.innerWidth - GRID_SIZE));
         const clampedY = Math.max(0, Math.min(snappedY, window.innerHeight - TASKBAR_HEIGHT - GRID_SIZE));
         const updatedIcons = icons.map(icon =>
-            icon.id === id ? { ...icon, x: clampedX, y: clampedY } : icon
+            icon.id === id ? {...icon, x: clampedX, y: clampedY} : icon
         );
 
-        // Проверка на перекрытие
+        // Overlap check
         for (let i = 0; i < updatedIcons.length; i++) {
             for (let j = 0; j < updatedIcons.length; j++) {
                 if (i !== j) {
@@ -205,7 +211,7 @@ const Desktop: React.FC = () => {
         setPinnedWindows((prev) =>
             prev.some(pinned => pinned.title === title)
                 ? prev.filter(pinned => pinned.title !== title)
-                : [...prev, { title, icon }]
+                : [...prev, {title, icon}]
         );
     };
 
@@ -225,11 +231,14 @@ const Desktop: React.FC = () => {
     }, []);
 
     if (sleepMode) {
-        return (<SleepScreen onWakeUp={handleWakeUp} />);
+        return (<SleepScreen onWakeUp={handleWakeUp}/>);
     }
 
     if (isLoginScreenVisible && !isLoggedIn) {
-        return (<LoginScreen onLogin={() => { setIsLoggedIn(true); setIsLoginScreenVisible(false); }} />);
+        return (<LoginScreen onLogin={() => {
+            setIsLoggedIn(true);
+            setIsLoginScreenVisible(false);
+        }}/>);
     }
 
     const closeAllWindows = (title: string) => {
@@ -238,9 +247,9 @@ const Desktop: React.FC = () => {
 
     return (
         <div className={styles.desktop}>
-            <BackgroundScene />
+            <BackgroundScene/>
             {icons.map(icon => (
-                <Icon key={icon.id} {...icon} onDoubleClick={() => openWindow(icon.name)} onMove={moveIcon} />
+                <Icon key={icon.id} {...icon} onDoubleClick={() => openWindow(icon.name)} onMove={moveIcon}/>
             ))}
             <Taskbar
                 onClickStartButton={toggleStartMenu}
